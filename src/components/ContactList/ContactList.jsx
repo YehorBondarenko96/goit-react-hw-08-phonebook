@@ -1,34 +1,25 @@
 import css from '../Styles.module.css';
 import { ItemContact } from 'components/ItemContact/ItemContact';
-import { selectContacts, selectFilter, selectIsLoading, selectError  } from '../../redux/selectors';
-import { useEffect, useState } from "react";
+import { selectContacts, selectFilter, selectIsLoading, selectError } from '../../redux/selectors';
+import { useEffect} from "react";
 import { fetchContacts } from "../../redux/opertions";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../Loader/Loader";
-import { searchForBackground } from 'services/searchForStyles';
+import { backgroundImg } from '../../redux/selectors';
+import { searchForBackground } from '../../redux/searchForStyles';
 
 export const ContactList = () => {
     let contacts = useSelector(selectContacts);
     const filter = useSelector(selectFilter);
-    const [backgroundImg, setBackgroundImg] = useState(null);
+    const imgForBackground = useSelector(backgroundImg);
 
     const dispatch = useDispatch();
     const isLoading = useSelector(selectIsLoading);
     const error = useSelector(selectError);
 
     useEffect(() => {
-        const fetchData = async () => {
-            dispatch(fetchContacts());
-    
-            try {
-                const [allInfoBackgroundImg] = await searchForBackground();
-                setBackgroundImg(allInfoBackgroundImg.largeImageURL);
-            } catch (error) {
-                console.error('Error fetching background image:', error);
-            }
-        };
-    
-        fetchData();
+        dispatch(fetchContacts());
+        dispatch(searchForBackground());
     }, [dispatch]);
 
     if(filter.length > 0) {
@@ -36,7 +27,9 @@ export const ContactList = () => {
             }
 
     return(
-        <div className={css.divForContactList} style={{background: `url(${backgroundImg})`}}>
+        <div className={css.divForContactList} 
+        style={{background: `url(${imgForBackground})`}}
+        >
             {error && <h2>Oopsss...Something went wrong...</h2>}
             {isLoading && !error ? <Loader /> : (
                 <ul className={css.listContacts}>
