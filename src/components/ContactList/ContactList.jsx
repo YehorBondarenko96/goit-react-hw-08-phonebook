@@ -27,9 +27,7 @@ export const ContactList = () => {
             }
 
     return(
-        <div className={css.divForContactList} 
-        style={{background: `url(${imgForBackground})`}}
-        >
+        <div className={css.divForContactList} style={{background: `url(${imgForBackground})`}}>
             {error && <h2>Oopsss...Something went wrong...</h2>}
             {isLoading && !error ? <Loader /> : (
                 <ul className={css.listContacts}>

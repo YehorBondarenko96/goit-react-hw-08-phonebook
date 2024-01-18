@@ -34,9 +34,26 @@
 }
 
 .divForContactList{
+    margin-top: 20px;
     position: relative;
     width: 100%;
+    max-height: 500px;
+    height: 100%;
+    overflow: auto;
+
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    /* overflow-x: scroll; */
+    /* overflow-y: hidden; */
 }
+
+.divForContactList::-webkit-scrollbar{
+  width: 0 !important;
+  height: 0;
+  display: none !important;
+  background: transparent;
+}
+
 
 .listContacts{
     list-style-type: disc;
