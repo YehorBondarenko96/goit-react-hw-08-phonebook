@@ -16,4 +16,4 @@ export const backgroundImg = state => {
     return images[randomInt];
 };
 
-export const selectNumbIter = state => state.backgroundImages.numbsForImg;
+export const selectNumbsForImg = state => state.backgroundImages.numbsForImg;

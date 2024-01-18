@@ -11,7 +11,7 @@ const backgroundSlice = createSlice({
     initialState: backgroundInitialState,
     reducers: {
         createNumbs (state, action){
-            state.numbsForImg = []; 
+            state.numbsForImg = action.payload; 
         }
     },
     extraReducers: builder => {
