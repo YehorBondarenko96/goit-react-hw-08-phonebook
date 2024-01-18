@@ -6,7 +6,7 @@ export const selectIsLoading = state => state.contacts.isLoading;
 
 export const selectError = state => state.contacts.error;
 
-export const selectBackgroundImages = state => state.backgroundImages.backgroundImages;
+export const selectBackgroundImages = state => state.backgroundImages.images;
 
 
 export const backgroundImg = state => {
@@ -14,4 +14,6 @@ export const backgroundImg = state => {
     const lengthImages = images.length;
     const randomInt = Math.floor(Math.random() * lengthImages) + 1;
     return images[randomInt];
-}
+};
+
+export const selectNumbsImg = state => state.backgroundImages.numbsImg;

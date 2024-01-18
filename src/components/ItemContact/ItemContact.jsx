@@ -1,42 +1,42 @@
 import css from '../Styles.module.css';
 import {  useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../redux/opertions';
-import { selectBackgroundImages } from '../../redux/selectors';
-import { useState, useEffect } from 'react';
+import { writeNumbsImg } from '../../redux/backgroundImgSlice';
+import { selectNumbsImg, selectBackgroundImages } from '../../redux/selectors';
+import { useEffect, useState } from 'react';
 
 export const ItemContact = ({contact}) => {
     const dispatch = useDispatch();
     const images = useSelector(selectBackgroundImages);
-    const [numbsImg, setNumbsImg] = useState([]);
+    const numbsImg = useSelector(selectNumbsImg);
     const [img, setImg] = useState(null);
 
     useEffect(() => {
-    const randomInt = () => {
-        const lengthImages = images.length;
-    
-        if (lengthImages !== 0){
-            const newNumb = Math.floor(Math.random() * lengthImages) + 1;
+        const randomInt = () => {
+            const lengthImages = images.length;
         
-            if(numbsImg.includes(newNumb)){
-                randomInt(lengthImages)
-            } else if (numbsImg.length >= 5){
-                const newNumbsImg = numbsImg.splice(0, 1);
-                setNumbsImg([...newNumbsImg, newNumb])
-            } else {
-                setNumbsImg([...numbsImg, newNumb])
+            if (lengthImages !== 0){
+                const newNumb = Math.floor(Math.random() * lengthImages) + 1;
+            
+                if(numbsImg.includes(newNumb)){
+                    randomInt();
+                } else {
+                    dispatch(writeNumbsImg(newNumb));
+                };
             };
-    }
-    };
-
-    const backgroundImg = () => {
-        randomInt();
-        const thisNumb = numbsImg[numbsImg.length - 1];
-
-        setImg(images[thisNumb]);
-    };
+        };
     
-        backgroundImg()
-    }, [images])
+        const backgroundImg = () => {
+            randomInt();
+            const thisNumb = numbsImg[numbsImg.length - 1];
+    
+            setImg(images[thisNumb]);
+        };
+            
+            backgroundImg()
+
+            console.log(numbsImg);
+        }, [images, dispatch, numbsImg])
 
     const updateStateForDelete = () => {
         const idContact = contact.id;
