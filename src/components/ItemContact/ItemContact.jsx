@@ -30,7 +30,7 @@ export const ItemContact = ({contact, imagesForContacts, index}) => {
     return(
         <li key={contact.id} className={css.itemContscts}
         style={{
-            backgroundImage: `url(${img ?? reservedImg})`,
+            backgroundImage: `url(${img || reservedImg})`,
             backgroundSize: 'cover', 
             backgroundPosition: 'center', 
             }}>
