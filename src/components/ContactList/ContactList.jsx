@@ -1,7 +1,7 @@
 import css from '../Styles.module.css';
 import { ItemContact } from 'components/ItemContact/ItemContact';
 import { selectContacts, selectFilter, selectIsLoading, selectError } from '../../redux/selectors';
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { fetchContacts } from "../../redux/opertions";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../Loader/Loader";
@@ -16,6 +16,7 @@ export const ContactList = () => {
     const dispatch = useDispatch();
     const isLoading = useSelector(selectIsLoading);
     const error = useSelector(selectError);
+
 
     useEffect(() => {
         dispatch(fetchContacts());
@@ -38,7 +39,7 @@ export const ContactList = () => {
                     <ul className={css.listContacts}>
                 {contacts.length !== 0 &&
                 contacts.map((contact) => (
-                    <ItemContact 
+                        <ItemContact 
                     key={contact.id}
                     contact={contact}
                     />

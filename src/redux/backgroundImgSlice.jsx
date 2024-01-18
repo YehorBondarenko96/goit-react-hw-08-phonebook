@@ -3,22 +3,15 @@ import { searchForBackground } from "./searchForStyles";
 
 const backgroundInitialState = {
     images: [],
-    numbsImg:[],
-    numbOfIter: 1
+    numbsForImg: []
 };
 
 const backgroundSlice = createSlice({
     name: 'backgroundImages',
     initialState: backgroundInitialState,
     reducers: {
-        writeNumbsImg (state, action){
-                if (state.numbOfIter <= state.images.length){
-                    if (state.numbsImg.length >= 5){
-                state.numbsImg.splice(0, 1);
-            };
-            state.numbsImg.push(action.payload);
-            state.numbOfIter +=1;
-        }
+        createNumbs (state, action){
+            state.numbsForImg = []; 
         }
     },
     extraReducers: builder => {
@@ -33,4 +26,4 @@ const backgroundSlice = createSlice({
 
 export const backgroundReducer = backgroundSlice.reducer;
 
-export const { writeNumbsImg } = backgroundSlice.actions;
+export const { createNumbs } = backgroundSlice.actions;
