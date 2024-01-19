@@ -1,32 +1,31 @@
 import css from '../Styles.module.css';
-import {  useDispatch } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../redux/opertions';
-// import { selectNumbsForImg } from '../../redux/selectors';
+import { selectNumbsForImg, selectBackgrounds } from '../../redux/selectors';
 
-export const ItemContact = ({contact, imagesForContacts, index}) => {
+export const ItemContact = ({contact, index}) => {
     const dispatch = useDispatch();
-    // const numbsForImg = useSelector(selectNumbsForImg);
+    const numbsForImg = useSelector(selectNumbsForImg);
+    const backgrounds = useSelector(selectBackgrounds);
 
     const updateStateForDelete = () => {
         const idContact = contact.id;
         dispatch(deleteContact(idContact));
         };
 
-    const reservedImg = imagesForContacts[0];
-    // const secondImagesForContacts = imagesForContacts.filter(img => img !== reservedImg);
+    const reservedImg = 'https://pixabay.com/get/g44ed012b5318cdd8e2a1cfb886aed57bc421e5f5974ba512ea672535a75d2bb0d1a82852705eac0edab0d5926df8c1b1_1280.jpg';
 
-    // const lengthNumbsForImg = numbsForImg.length - 1;
-    // let numb = 1;
+    const lengthNumbsForImg = numbsForImg.length;
+    let numb = 1;
 
-    // if (index > lengthNumbsForImg){
-    //     numb = numbsForImg[index % lengthNumbsForImg];
-    // } else {
-    //     numb = numbsForImg[Math.abs(index)];
-    // }
+    if (index >= lengthNumbsForImg){
+        numb = numbsForImg[index % lengthNumbsForImg];
+    } else {
+        numb = numbsForImg[index];
+    }
 
     
-    // const img = secondImagesForContacts[numb];
-    const img = 'https://pixabay.com/get/g3ed7d486cc5b37731e8ed71396efa6382fca2f5612edc7fa4e1432973c87e1a5de6c13079cfcaf6225e626de69f10f90_1280.jpg';
+    const img = backgrounds[numb] ? backgrounds[numb].img : 'https://pixabay.com/get/gee299433c5e821a3f4a75f67de07ae42a18743837de827a20fce49e3e9e330757c3d649f2e028a3f3c0ea6db2d5138716bd86d685a7c8e5d83a06777c8b0c2d9_1280.jpg';
 
     return(
         <li key={contact.id} className={css.itemContscts}

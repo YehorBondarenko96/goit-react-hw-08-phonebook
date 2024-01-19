@@ -5,30 +5,27 @@ import { useEffect } from "react";
 import { fetchContacts } from "../../redux/opertions";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../Loader/Loader";
-import {  selectBackgroundImages } from '../../redux/selectors';
+import { selectBackgrounds } from '../../redux/selectors';
 import { searchForBackground } from '../../redux/searchForStyles';
 import { createNumbs } from '../../redux/backgroundImgSlice';
 
 export const ContactList = () => {
     let contacts = useSelector(selectContacts);
     const filter = useSelector(selectFilter);
-    // const imgForBackground = useSelector(backgroundImg);
-    const imgForBackground = 'https://pixabay.com/get/g3ed7d486cc5b37731e8ed71396efa6382fca2f5612edc7fa4e1432973c87e1a5de6c13079cfcaf6225e626de69f10f90_1280.jpg';
-    const backgroundImages = useSelector(selectBackgroundImages);
+    const backgrounds = useSelector(selectBackgrounds);
     const numbsForImg = useSelector(selectNumbsForImg);
 
     const dispatch = useDispatch();
     const isLoading = useSelector(selectIsLoading);
     const error = useSelector(selectError);
 
-    const imagesForContacts = backgroundImages.filter(img => img !== imgForBackground);
-
+    const imgForBackground = 'https://pixabay.com/get/g9072d6f6846fce7645d5fe5c262328dd068f2203cb39f6a51d9e6e20b22815de934a4afe8fa7d310d78ae673378338be1757cd6f00cfd576e98e119e9f635dc2_1280.jpg';
     
     const makeMassifNumbs = () => {
         const massifNumbers = [];
-        const lengthImgMas = imagesForContacts.length;
+        const lengthImgMas = backgrounds.length - 1;
         function createMassNumbs (){
-            const randomNumb = Math.floor(Math.random() * lengthImgMas) + 1;
+            const randomNumb = Math.floor(Math.random() * lengthImgMas);
         const lengthMasNumb = massifNumbers.length;
         if( massifNumbers[lengthMasNumb-1] !== randomNumb &&
             massifNumbers[lengthMasNumb-2] !== randomNumb &&
@@ -47,7 +44,7 @@ export const ContactList = () => {
     };
 
     useEffect(() => {
-        if (numbsForImg.length < imagesForContacts.length){
+        if (numbsForImg.length < backgrounds.length){
         dispatch(createNumbs(makeMassifNumbs()));
         };
     });
@@ -76,7 +73,6 @@ export const ContactList = () => {
                         <ItemContact 
                     key={contact.id}
                     contact={contact}
-                    imagesForContacts={imagesForContacts}
                     index={contacts.indexOf(contact)}
                     />
                 ))
