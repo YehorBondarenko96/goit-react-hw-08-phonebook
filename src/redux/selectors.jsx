@@ -10,7 +10,7 @@ export const selectBackgroundImages = state => state.backgroundImages.images;
 
 
 export const backgroundImg = state => {
-    const images = selectBackgroundImages(state)
+    const images = selectBackgroundImages(state);
     const lengthImages = images.length;
     const randomInt = Math.floor(Math.random() * lengthImages) + 1;
     return images[randomInt];

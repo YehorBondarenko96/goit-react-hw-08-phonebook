@@ -45,8 +45,6 @@ export const ContactList = () => {
         return massifNumbers
     };
 
-    console.log(2);
-
     useEffect(() => {
         if (numbsForImg.length < imagesForContacts.length){
         dispatch(createNumbs(makeMassifNumbs()));
