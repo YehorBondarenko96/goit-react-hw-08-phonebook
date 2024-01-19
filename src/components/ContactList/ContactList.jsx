@@ -5,14 +5,15 @@ import { useEffect } from "react";
 import { fetchContacts } from "../../redux/opertions";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../Loader/Loader";
-import { backgroundImg, selectBackgroundImages } from '../../redux/selectors';
+import {  selectBackgroundImages } from '../../redux/selectors';
 import { searchForBackground } from '../../redux/searchForStyles';
 import { createNumbs } from '../../redux/backgroundImgSlice';
 
 export const ContactList = () => {
     let contacts = useSelector(selectContacts);
     const filter = useSelector(selectFilter);
-    const imgForBackground = useSelector(backgroundImg);
+    // const imgForBackground = useSelector(backgroundImg);
+    const imgForBackground = 'https://pixabay.com/get/g3ed7d486cc5b37731e8ed71396efa6382fca2f5612edc7fa4e1432973c87e1a5de6c13079cfcaf6225e626de69f10f90_1280.jpg';
     const backgroundImages = useSelector(selectBackgroundImages);
     const numbsForImg = useSelector(selectNumbsForImg);
 

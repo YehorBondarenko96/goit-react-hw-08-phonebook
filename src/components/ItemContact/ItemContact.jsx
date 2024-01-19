@@ -35,11 +35,13 @@ export const ItemContact = ({contact, imagesForContacts, index}) => {
             backgroundSize: 'cover', 
             backgroundPosition: 'center', 
             }}>
-                <h2 className={css.pItemContactsName}>{contact.name}:</h2> 
-                <p className={css.pItemContactsNumber}>{contact.phone}</p>
-                <button id={contact.id} className={css.buttonDelete} type='button' onClick={updateStateForDelete}>
-                    Delete
-                </button>
+                <div className={css.divItemContact}>
+                    <h2 className={css.pItemContactsName}>{contact.name}:</h2> 
+                    <p className={css.pItemContactsNumber}>{contact.phone}</p>
+                    <button id={contact.id} className={css.buttonDelete} type='button' onClick={updateStateForDelete}>
+                        Delete
+                    </button>
+                </div>
         </li>
     )
 }
