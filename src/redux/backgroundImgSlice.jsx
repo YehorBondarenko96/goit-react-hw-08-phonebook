@@ -12,6 +12,9 @@ const backgroundSlice = createSlice({
     reducers: {
         createNumbs (state, action){
             state.numbsForImg = action.payload; 
+        },
+        deleteNumb (state){
+            state.numbsForImg.shift();
         }
     },
     extraReducers: builder => {
@@ -26,4 +29,4 @@ const backgroundSlice = createSlice({
 
 export const backgroundReducer = backgroundSlice.reducer;
 
-export const { createNumbs } = backgroundSlice.actions;
+export const { createNumbs, deleteNumb } = backgroundSlice.actions;

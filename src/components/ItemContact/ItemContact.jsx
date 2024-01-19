@@ -2,6 +2,7 @@ import css from '../Styles.module.css';
 import {  useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../redux/opertions';
 import { selectNumbsForImg, selectBackgrounds } from '../../redux/selectors';
+import { deleteNumb } from '../../redux/backgroundImgSlice';
 
 export const ItemContact = ({contact, index}) => {
     const dispatch = useDispatch();
@@ -11,6 +12,7 @@ export const ItemContact = ({contact, index}) => {
     const updateStateForDelete = () => {
         const idContact = contact.id;
         dispatch(deleteContact(idContact));
+        dispatch(deleteNumb());
         };
 
     const reservedImg = 'https://pixabay.com/get/g44ed012b5318cdd8e2a1cfb886aed57bc421e5f5974ba512ea672535a75d2bb0d1a82852705eac0edab0d5926df8c1b1_1280.jpg';

@@ -59,27 +59,31 @@ export const ContactList = () => {
             }
 
     return(
+        <>
+        {error ? (
+        <h2>Oopsss...Something went wrong...</h2>
+        ) : (
         <div className={css.divForContactList} 
-        style={{
-            backgroundImage: `url(${imgForBackground})`,
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center', 
-            }}>
-            {error && <h2>Oopsss...Something went wrong...</h2>}
-            {isLoading && !error ? <Loader /> : (
-                    <ul className={css.listContacts}>
-                {contacts.length !== 0 &&
-                contacts.map((contact) => (
-                        <ItemContact 
-                    key={contact.id}
-                    contact={contact}
-                    index={contacts.indexOf(contact)}
-                    />
-                ))
-                }
-                </ul>
+            style={{
+                backgroundImage: `url(${imgForBackground})`,
+                backgroundSize: 'cover', 
+                backgroundPosition: 'center', 
+                }}>
+                {isLoading && !error ? <Loader /> : (
+                        <ul className={css.listContacts}>
+                    {contacts.length !== 0 &&
+                    contacts.map((contact) => (
+                            <ItemContact 
+                        key={contact.id}
+                        contact={contact}
+                        index={contacts.indexOf(contact)}
+                        />
+                    ))
+                    }
+                    </ul>
+                )}
+            </div>
             )}
-            {error && contacts.length > 0 && <h2>Oopsss...Something went wrong...</h2>}
-        </div>
+        </>
     )
 }
