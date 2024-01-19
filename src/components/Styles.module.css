@@ -75,7 +75,7 @@
                 font-size 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.itemContact:focus{
+.itemContact:hover{
     min-width: 700px;
     max-height: 420px;
     font-size: 36px;
@@ -125,7 +125,7 @@
                 height 250ms cubic-bezier(0.25, 0.1, 0.25, 1), border-width 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.itemContact:focus .buttonDelete{
+.itemContact:hover .buttonDelete{
     top: 33px;
     right: 33px;
     width: 58px;
@@ -159,8 +159,8 @@
 	transform: rotate(-45deg);
 }
 
-.itemContact:focus .buttonDelete::before,
-.itemContact:focus .buttonDelete::after {
+.itemContact:hover .buttonDelete::before,
+.itemContact:hover .buttonDelete::after {
 	width: 40px;
 	height: 5px;
 }
