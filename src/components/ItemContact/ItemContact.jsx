@@ -26,6 +26,8 @@ export const ItemContact = ({contact, imagesForContacts, index}) => {
 
     
     const img = secondImagesForContacts[numb];
+    
+    console.log(1);
 
     return(
         <li key={contact.id} className={css.itemContscts}

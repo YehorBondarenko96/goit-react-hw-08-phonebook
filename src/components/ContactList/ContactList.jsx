@@ -1,6 +1,6 @@
 import css from '../Styles.module.css';
 import { ItemContact } from 'components/ItemContact/ItemContact';
-import { selectContacts, selectFilter, selectIsLoading, selectError } from '../../redux/selectors';
+import { selectContacts, selectFilter, selectIsLoading, selectError, selectNumbsForImg } from '../../redux/selectors';
 import { useEffect } from "react";
 import { fetchContacts } from "../../redux/opertions";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,7 @@ export const ContactList = () => {
     const filter = useSelector(selectFilter);
     const imgForBackground = useSelector(backgroundImg);
     const backgroundImages = useSelector(selectBackgroundImages);
+    const numbsForImg = useSelector(selectNumbsForImg);
 
     const dispatch = useDispatch();
     const isLoading = useSelector(selectIsLoading);
@@ -44,8 +45,12 @@ export const ContactList = () => {
         return massifNumbers
     };
 
+    console.log(2);
+
     useEffect(() => {
+        if (numbsForImg.length < imagesForContacts.length){
         dispatch(createNumbs(makeMassifNumbs()));
+        };
     });
 
     useEffect(() => {
