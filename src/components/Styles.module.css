@@ -63,23 +63,30 @@
     background: transparent;
 }
 
-.itemContscts{
+.itemContact{
+    font-size: 24px;
     padding: 0;
     min-width: 500px;
     max-height: 300px;
     height: 100%;
     background-color: #949494;
     border-radius: 20px;
+    transition: min-width 250ms cubic-bezier(0.25, 0.1, 0.25, 1), max-height 250ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                font-size 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.itemContact:focus{
+    min-width: 700px;
+    max-height: 420px;
+    font-size: 36px;
 }
 
 .divItemContact{
-    font-size: 24px;
     color: yellow;
     text-shadow: 2px 2px 5px black;
     background-color: rgba(255, 255, 255, 0.5);
-    min-width: 500px;
-    max-height: 300px;
-    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -104,18 +111,26 @@
     border-radius: 50%;
     background: transparent;
     color: transparent;
-    height: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 20px;
     position: absolute;
     top: 20px;
     right: 20px;
     width: 35px;
 	height: 35px;
 	cursor: pointer;
-    transition: border-color ease 0.5s;
+    transition: border-color ease 0.5s, top 250ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                right 250ms cubic-bezier(0.25, 0.1, 0.25, 1), width 250ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                height 250ms cubic-bezier(0.25, 0.1, 0.25, 1), border-width 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.itemContact:focus .buttonDelete{
+    top: 33px;
+    right: 33px;
+    width: 58px;
+	height: 58px;
+    border-width: 2px;
 }
 
 
@@ -133,6 +148,7 @@
 	width: 24px;
 	height: 3px;
 	background: red;
+    transition: width 250ms cubic-bezier(0.25, 0.1, 0.25, 1), height 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .buttonDelete::before {
@@ -141,4 +157,10 @@
 
 .buttonDelete::after {
 	transform: rotate(-45deg);
+}
+
+.itemContact:focus .buttonDelete::before,
+.itemContact:focus .buttonDelete::after {
+	width: 40px;
+	height: 5px;
 }
