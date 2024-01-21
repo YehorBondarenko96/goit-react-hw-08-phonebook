@@ -27,10 +27,10 @@ export const ItemContact = ({contact, index}) => {
     }
 
     
-    const img = backgrounds[numb] ? backgrounds[numb].img : 'https://pixabay.com/get/gee299433c5e821a3f4a75f67de07ae42a18743837de827a20fce49e3e9e330757c3d649f2e028a3f3c0ea6db2d5138716bd86d685a7c8e5d83a06777c8b0c2d9_1280.jpg';
+    const img = backgrounds[numb] ? backgrounds[numb].img : 'https://pixabay.com/get/g0bb93a3e12afc4772703a648130eb84ec5d9c5cf6812791177177bac057dcd18305db03e75fb5b392f7e2181dd911614_1280.jpg';
 
     return(
-        <li tabIndex={0} key={contact.id} className={css.itemContact}
+        <li id='itemContact' tabIndex={0} key={contact.id} className={css.itemContact}
         style={{
             backgroundImage: `url(${img || reservedImg})`,
             backgroundSize: 'cover', 

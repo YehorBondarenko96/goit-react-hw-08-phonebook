@@ -8,6 +8,7 @@ import { Loader } from "../Loader/Loader";
 import { selectBackgrounds } from '../../redux/selectors';
 import { searchForBackground } from '../../redux/searchForStyles';
 import { createNumbs } from '../../redux/backgroundImgSlice';
+import { script } from 'components/Styles.module';
 
 export const ContactList = () => {
     let contacts = useSelector(selectContacts);
@@ -19,7 +20,7 @@ export const ContactList = () => {
     const isLoading = useSelector(selectIsLoading);
     const error = useSelector(selectError);
 
-    const imgForBackground = 'https://pixabay.com/get/g9072d6f6846fce7645d5fe5c262328dd068f2203cb39f6a51d9e6e20b22815de934a4afe8fa7d310d78ae673378338be1757cd6f00cfd576e98e119e9f635dc2_1280.jpg';
+    const imgForBackground = 'https://pixabay.com/get/g27e8086761607fe75aac714a251144633eb14cce0a8dd42730b4be2ad852c6d6aca92641d936f0e8a2b9e236b1d3fdee7c18ab4c60cafa8482ad886a5f522670_1280.jpg';
     
     const makeMassifNumbs = () => {
         const massifNumbers = [];
@@ -47,6 +48,7 @@ export const ContactList = () => {
         if (numbsForImg.length < backgrounds.length){
         dispatch(createNumbs(makeMassifNumbs()));
         };
+        script();
     });
 
     useEffect(() => {
@@ -63,7 +65,7 @@ export const ContactList = () => {
         {error ? (
         <h2>Oopsss...Something went wrong...</h2>
         ) : (
-        <div className={css.divForContactList} 
+        <div id='divForContactList' className={css.divForContactList} 
             style={{
                 backgroundImage: `url(${imgForBackground})`,
                 backgroundSize: 'cover', 

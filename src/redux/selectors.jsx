@@ -10,7 +10,7 @@ export const selectError = state => state.contacts.error;
 
 export const selectBackgroundImages = state => state.backgroundImages.images;
 
-const blackListImages = [926728, 2325627, 2004483, 1911637, 1365995, 2750627];
+const blackListImages = [926728, 2325627, 2004483, 1911637, 1365995, 2750627, 11080, 5422901];
 
 export const selectBackgrounds = createSelector(
     [selectBackgroundImages, () => blackListImages],
