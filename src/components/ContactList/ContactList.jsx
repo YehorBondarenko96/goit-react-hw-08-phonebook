@@ -21,6 +21,7 @@ export const ContactList = () => {
 
     const bgGeneral = useSelector(selectBgGeneral)
     const imgForBackground = bgGeneral ? bgGeneral.img : null;
+    console.log('imgForBackground: ', imgForBackground);
     
     const makeMassifNumbs = () => {
         const massifNumbers = [];

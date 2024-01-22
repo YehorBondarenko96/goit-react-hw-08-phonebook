@@ -45,6 +45,8 @@ export const ItemContact = ({contact, index}) => {
 
     
     const img = backgrounds[numb] ? backgrounds[numb].img : null;
+    console.log('img: ', img);
+    console.log('reservedImg: ', reservedImg);
     return(
         <li id='itemContact' tabIndex={0} key={contact.id} className={css.itemContact}
         style={{
