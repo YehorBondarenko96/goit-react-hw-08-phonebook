@@ -1,13 +1,20 @@
 import css from '../Styles.module.css';
 import {  useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../redux/opertions';
-import { selectNumbsForImg, selectBackgrounds } from '../../redux/selectors';
+import { selectNumbsForImg, selectBackgrounds, selectBackgroundImages, selectBgGeneral, selectReservedBG } from '../../redux/selectors';
 import { deleteNumb } from '../../redux/backgroundImgSlice';
+import { useEffect, useState } from 'react';
 
 export const ItemContact = ({contact, index}) => {
     const dispatch = useDispatch();
     const numbsForImg = useSelector(selectNumbsForImg);
     const backgrounds = useSelector(selectBackgrounds);
+
+    const lengthBgImages = useSelector(selectBackgroundImages).length;
+    const objBgGeneral = useSelector(selectBgGeneral);
+    const bgGeneral =objBgGeneral ?objBgGeneral.img : null;
+    const objReservedBg = useSelector(selectReservedBG);
+    const reservedBG = objReservedBg ? objReservedBg.img : null;
 
     const updateStateForDelete = () => {
         const idContact = contact.id;
@@ -15,7 +22,17 @@ export const ItemContact = ({contact, index}) => {
         dispatch(deleteNumb());
         };
 
-    const reservedImg = 'https://pixabay.com/get/g44ed012b5318cdd8e2a1cfb886aed57bc421e5f5974ba512ea672535a75d2bb0d1a82852705eac0edab0d5926df8c1b1_1280.jpg';
+    const [reservedImg, setReservedImg] = useState(null);
+
+    useEffect(() => {
+        if(lengthBgImages > 1){
+            setReservedImg(reservedBG);
+        } else if(lengthBgImages === 1){
+            setReservedImg(bgGeneral);
+        } else {
+            setReservedImg(null);
+        }
+    }, [lengthBgImages, bgGeneral, reservedBG, reservedImg]);
 
     const lengthNumbsForImg = numbsForImg.length;
     let numb = 1;
@@ -27,8 +44,7 @@ export const ItemContact = ({contact, index}) => {
     }
 
     
-    const img = backgrounds[numb] ? backgrounds[numb].img : 'https://pixabay.com/get/g0bb93a3e12afc4772703a648130eb84ec5d9c5cf6812791177177bac057dcd18305db03e75fb5b392f7e2181dd911614_1280.jpg';
-
+    const img = backgrounds[numb] ? backgrounds[numb].img : null;
     return(
         <li id='itemContact' tabIndex={0} key={contact.id} className={css.itemContact}
         style={{
