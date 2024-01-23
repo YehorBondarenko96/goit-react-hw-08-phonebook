@@ -24,8 +24,8 @@ export const UlForCL = () => {
             // const diffPositionX = rectListContacts.x - rectItem.x;
             // const ourConst = Math.abs(rectListContacts.width/2 - rectItem.width); //139
             // const condition = Math.abs(ourConst - diffPositionX);
-            const startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width - 300;
-            const secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width - 300;
+            const startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 - 100;
+            const secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 100;
             // const intervalStAc = 
             // const finishedActive = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2;
             if(rectItem.x > startActive && 
@@ -42,7 +42,7 @@ export const UlForCL = () => {
                 item.classList.add(css.itemContactActive);
                 const scrollLForList = listContacts.current.scrollLeft;
                 listContacts.current.style.scrollBehavior = 'smooth';
-                listContacts.current.scrollLeft = scrollLForList - rectItem.width/2;
+                listContacts.current.scrollLeft = scrollLForList;
 
                 // setTimeout(() => {
                 //     listContacts.current.style.scrollBehavior = 'auto';
