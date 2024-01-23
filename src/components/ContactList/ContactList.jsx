@@ -1,17 +1,15 @@
 import css from '../Styles.module.css';
-import { ItemContact } from 'components/ItemContact/ItemContact';
-import { selectContacts, selectFilter, selectIsLoading, selectError, selectNumbsForImg, selectBackgrounds, selectBgGeneral } from '../../redux/selectors';
+import { UlForCL } from 'components/UlForCL/UlForCL';
+import { selectIsLoading, selectError, selectNumbsForImg, selectBackgrounds, selectBgGeneral } from '../../redux/selectors';
 import { useEffect } from "react";
 import { fetchContacts } from "../../redux/opertions";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../Loader/Loader";
 import { searchForBackground } from '../../redux/searchForStyles';
 import { createNumbs } from '../../redux/backgroundImgSlice';
-import { script } from 'components/Styles.module';
 
 export const ContactList = () => {
-    let contacts = useSelector(selectContacts);
-    const filter = useSelector(selectFilter);
+    
     const backgrounds = useSelector(selectBackgrounds);
     const numbsForImg = useSelector(selectNumbsForImg);
 
@@ -20,8 +18,7 @@ export const ContactList = () => {
     const error = useSelector(selectError);
 
     const bgGeneral = useSelector(selectBgGeneral)
-    const imgForBackground = bgGeneral ? bgGeneral.img : null;
-    console.log('imgForBackground: ', imgForBackground);
+    const imgForBackground = bgGeneral ? bgGeneral.img : 'https://lh3.googleusercontent.com/pw/ABLVV86IPJr1Kwre2rY34RLHxw5s_jl_SAFHpmWY0V3BSJm_NjuCHs3IY1SS38gbQPCBKSz6jFxURe5sYDOs0gagIti84UDB_i0cbXzrUAPmtTkdC4EmLr7KNjESbtNtDjPs_rgGNtR4uTNT7ARtfLoqoJJA2A=w612-h344-s-no-gm?authuser=0';
     
     const makeMassifNumbs = () => {
         const massifNumbers = [];
@@ -49,7 +46,6 @@ export const ContactList = () => {
         if (numbsForImg.length < backgrounds.length){
         dispatch(createNumbs(makeMassifNumbs()));
         };
-        script();
     });
 
     useEffect(() => {
@@ -57,9 +53,9 @@ export const ContactList = () => {
         dispatch(searchForBackground());
     }, [dispatch]);
 
-    if(filter.length > 0) {
-                contacts = contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()))
-            }
+    
+
+
 
     return(
         <>
@@ -72,19 +68,7 @@ export const ContactList = () => {
                 backgroundSize: 'cover', 
                 backgroundPosition: 'center', 
                 }}>
-                {isLoading && !error ? <Loader /> : (
-                        <ul className={css.listContacts}>
-                    {contacts.length !== 0 &&
-                    contacts.map((contact) => (
-                            <ItemContact 
-                        key={contact.id}
-                        contact={contact}
-                        index={contacts.indexOf(contact)}
-                        />
-                    ))
-                    }
-                    </ul>
-                )}
+                {isLoading && !error ? <Loader /> : <UlForCL />}
             </div>
             )}
         </>

@@ -16,6 +16,8 @@ export const ItemContact = ({contact, index}) => {
     const objReservedBg = useSelector(selectReservedBG);
     const reservedBG = objReservedBg ? objReservedBg.img : null;
 
+    
+
     const updateStateForDelete = () => {
         const idContact = contact.id;
         dispatch(deleteContact(idContact));
@@ -43,12 +45,10 @@ export const ItemContact = ({contact, index}) => {
         numb = numbsForImg[index];
     }
 
-    
     const img = backgrounds[numb] ? backgrounds[numb].img : null;
-    console.log('img: ', img);
-    console.log('reservedImg: ', reservedImg);
+
     return(
-        <li id='itemContact' tabIndex={0} key={contact.id} className={css.itemContact}
+        <div className={css.firstDivItemContact}
         style={{
             backgroundImage: `url(${img || reservedImg})`,
             backgroundSize: 'cover', 
@@ -61,6 +61,6 @@ export const ItemContact = ({contact, index}) => {
                         Delete
                     </button>
                 </div>
-        </li>
+        </div>
     )
 }
