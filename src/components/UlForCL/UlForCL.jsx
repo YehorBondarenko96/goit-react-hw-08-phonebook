@@ -21,9 +21,9 @@ export const UlForCL = () => {
         const readRectItem = (item) => {
             const rectItem = item.getBoundingClientRect();
             const rectListContacts = listContacts.current.getBoundingClientRect();
-            const diffPositionX = rectListContacts.x - rectItem.x;
-            const ourConst = Math.abs(rectListContacts.width/2 - rectItem.width); //139
-            const condition = Math.abs(ourConst - diffPositionX);
+            // const diffPositionX = rectListContacts.x - rectItem.x;
+            // const ourConst = Math.abs(rectListContacts.width/2 - rectItem.width); //139
+            // const condition = Math.abs(ourConst - diffPositionX);
             const startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 - 100;
             // const finishedActive = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2;
             if(rectItem.x > startActive && rectItem.x < startActive + 10){
