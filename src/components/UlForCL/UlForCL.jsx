@@ -15,21 +15,34 @@ export const UlForCL = () => {
         contacts = contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()))
     };
 
-    const readRectItem = (item) => {
-        const rectItem = item.getBoundingClientRect();
-        const rectListContacts = listContacts.current.getBoundingClientRect();
-        const diffPositionX = Math.abs(rectListContacts.x - rectItem.x);
-        const ourConst = Math.abs(rectListContacts.width/2 - rectItem.width);
-        const condition = Math.abs(ourConst - diffPositionX);
-        if(condition < 500){
-            item.classList.add(css.itemContactActive);
-        } else {
-            item.classList.remove(css.itemContactActive);
-        }
-    };
-
     useEffect(() => {
         const itemsContact = document.querySelectorAll('.itemContact');
+
+        const readRectItem = (item) => {
+            const rectItem = item.getBoundingClientRect();
+            const rectListContacts = listContacts.current.getBoundingClientRect();
+            const diffPositionX = rectListContacts.x - rectItem.x;
+            const ourConst = Math.abs(rectListContacts.width/2 - rectItem.width); //139
+            const condition = Math.abs(ourConst - diffPositionX);
+            const startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 - 100;
+            // const finishedActive = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2;
+            if(rectItem.x > startActive && rectItem.x < startActive + 10){
+                console.log('rectItem.x: ', rectItem.x);
+                console.log('startActive: ', startActive);
+                // console.log(rectListContacts);
+                // console.log(rectItem);
+                // console.log(ourConst);
+                // console.log(condition);
+                itemsContact.forEach(i => i.classList.remove(css.itemContactActive));
+                item.classList.add(css.itemContactActive);
+                const scrollLForList = listContacts.current.scrollLeft;
+                listContacts.current.style.scrollBehavior = 'smooth';
+                listContacts.current.scrollLeft = scrollLForList - 500;
+            } 
+            // else {
+            //     item.classList.remove(css.itemContactActive);
+            // }
+        };
 
         const forScroll = () => {
             itemsContact.forEach(item => readRectItem(item));
@@ -48,7 +61,6 @@ export const UlForCL = () => {
                     <ItemContact 
                         contact={contact}
                         index={contacts.indexOf(contact)}
-                        readRectItem={readRectItem}
                         key={contact.id}
                     />
                     </li>

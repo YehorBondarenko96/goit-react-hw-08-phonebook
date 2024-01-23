@@ -18,7 +18,7 @@ export const ContactList = () => {
     const error = useSelector(selectError);
 
     const bgGeneral = useSelector(selectBgGeneral)
-    const imgForBackground = bgGeneral ? bgGeneral.img : 'https://lh3.googleusercontent.com/pw/ABLVV86IPJr1Kwre2rY34RLHxw5s_jl_SAFHpmWY0V3BSJm_NjuCHs3IY1SS38gbQPCBKSz6jFxURe5sYDOs0gagIti84UDB_i0cbXzrUAPmtTkdC4EmLr7KNjESbtNtDjPs_rgGNtR4uTNT7ARtfLoqoJJA2A=w612-h344-s-no-gm?authuser=0';
+    const imgForBackground = bgGeneral ? bgGeneral.img : null;
     
     const makeMassifNumbs = () => {
         const massifNumbers = [];
