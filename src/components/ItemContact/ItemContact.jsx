@@ -6,16 +6,18 @@ import { deleteNumb } from '../../redux/backgroundImgSlice';
 import { useEffect, useState } from 'react';
 
 export const ItemContact = ({contact, index}) => {
+    const extraReservedImg = 'https://lh3.googleusercontent.com/pw/ABLVV857Vcs93eVOrm0Pm8WnNvcJSKLX3arSslyCmWpj-7cuG6ywCsjBpMiPRikFXgiC2xK8v2En5xPEynswskO4l7gjBpdWNWzhFRyOj8BJ3orxfjDDlbSF1EOr7mROLVTTOvdNiJhvM432128-GmRqOrEKcQ=w1500-h1000-s-no-gm?authuser=0';
+
     const dispatch = useDispatch();
     const numbsForImg = useSelector(selectNumbsForImg);
     const backgrounds = useSelector(selectBackgrounds);
 
     const lengthBgImages = useSelector(selectBackgroundImages).length;
     const objBgGeneral = useSelector(selectBgGeneral);
-    const bgGeneral =objBgGeneral ?objBgGeneral.img : null;
+    const bgGeneral = objBgGeneral ? objBgGeneral.img : 'https://lh3.googleusercontent.com/pw/ABLVV84w_pNrNk2EMyul9WEZQIGgWoLvREgHEC97b4Mf15Ks5Hoqt7v7nc07QVJrbIMlK2LWegS0dAQKL6yuKPxHGHqTDwlQOCxOMGTWtrhzl73nYIFv9CWK4h9QUB2dvOTMfXj-twNVuqOHLhczMnZRTAvECg=w1920-h1080-s-no-gm?authuser=0';
     const objReservedBg = useSelector(selectReservedBG);
-    const reservedBG = objReservedBg ? objReservedBg.img : null;
-
+    const reservedBG = objReservedBg ? objReservedBg.img : extraReservedImg;
+   
     
 
     const updateStateForDelete = () => {
@@ -24,7 +26,7 @@ export const ItemContact = ({contact, index}) => {
         dispatch(deleteNumb());
         };
 
-    const [reservedImg, setReservedImg] = useState(null);
+    const [reservedImg, setReservedImg] = useState(extraReservedImg);
 
     useEffect(() => {
         if(lengthBgImages > 1){
@@ -32,7 +34,7 @@ export const ItemContact = ({contact, index}) => {
         } else if(lengthBgImages === 1){
             setReservedImg(bgGeneral);
         } else {
-            setReservedImg(null);
+            setReservedImg(extraReservedImg);
         }
     }, [lengthBgImages, bgGeneral, reservedBG, reservedImg]);
 

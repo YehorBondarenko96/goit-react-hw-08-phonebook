@@ -21,8 +21,8 @@ export const UlForCL = () => {
         const readRectItem = (item) => {
             const rectItem = item.getBoundingClientRect();
             const rectListContacts = listContacts.current.getBoundingClientRect();
-            const startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 - 100;
-            const secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 100;;
+            const startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 - 200;
+            const secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 200;;
             if(rectItem.x > startActive && 
                 rectItem.x < rectListContacts.x + rectListContacts.width/2 &&
                 !item.classList.contains(css.itemContactActive)){
@@ -30,7 +30,7 @@ export const UlForCL = () => {
                 item.classList.add(css.itemContactActive);
                 const scrollLForList = listContacts.current.scrollLeft;
                 listContacts.current.style.scrollBehavior = 'smooth';
-                listContacts.current.scrollLeft = scrollLForList + 50;
+                listContacts.current.scrollLeft = scrollLForList - rectItem.width/2 + 200;
             } else if(rectItem.x > rectListContacts.x + rectListContacts.width/2 && 
                 rectItem.x < secondStAct &&
                 !item.classList.contains(css.itemContactActive)){
@@ -38,7 +38,7 @@ export const UlForCL = () => {
                     item.classList.add(css.itemContactActive);
                     const scrollLForList = listContacts.current.scrollLeft;
                     listContacts.current.style.scrollBehavior = 'smooth';
-                    listContacts.current.scrollLeft = scrollLForList + rectItem.width/2;
+                    listContacts.current.scrollLeft = scrollLForList + rectItem.width/2 - 100;
                 }
         };
 
