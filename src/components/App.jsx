@@ -1,27 +1,36 @@
 import React from "react";
-import { ContactForm } from "./ContactForm/ContactForm";
-import { ContactList } from "./ContactList/ContactList";
-import { Filter } from "./Filter/Filter";
-import css from './Styles.module.css';
+// import { ContactForm } from "./ContactForm/ContactForm";
+// import { ContactList } from "./ContactList/ContactList";
+// import { Filter } from "./Filter/Filter";
+// import css from './Styles.module.css';
+import { Route, Routes } from "react-router-dom";
+import { lazy } from "react";
+
+const Register = lazy(() => import("./Register/Register"));
 
 export const App = () => {
   return (
     <div
       style={{
+        background: '#202020',
         height: '100%',
         display: 'flex',
         fontSize: 20,
-        color: '#010101',
-        margin: 20
+        color: '#fff',
+        margin: 0,
+        padding: 20
       }}
     >
       <div style={{width: '100%'}}>
-  <h1 className={css.phonebook}>Phonebook</h1>
+  <Routes>
+    <Route path="/" element={<Register/>}/>
+  {/* <h1 className={css.phonebook}>Phonebook</h1>
   <ContactForm />
 
   <h2 className={css.contacts}>Contacts</h2>
   <Filter />
-  <ContactList />
+  <ContactList /> */}
+  </Routes>
 </div>
     </div>
   )
