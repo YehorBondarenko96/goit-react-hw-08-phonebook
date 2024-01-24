@@ -18,35 +18,56 @@ export const UlForCL = () => {
     useEffect(() => {
         const itemsContact = document.querySelectorAll('.itemContact');
 
-        const readRectItem = (item) => {
-            const rectItem = item.getBoundingClientRect();
-            const rectListContacts = listContacts.current.getBoundingClientRect();
-            const startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 - 200;
-            const secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 200;;
-            if(rectItem.x > startActive && 
-                rectItem.x < rectListContacts.x + rectListContacts.width/2 &&
-                !item.classList.contains(css.itemContactActive)){
-                itemsContact.forEach(i => i.classList.remove(css.itemContactActive));
-                item.classList.add(css.itemContactActive);
-                const scrollLForList = listContacts.current.scrollLeft;
-                listContacts.current.style.scrollBehavior = 'smooth';
-                listContacts.current.scrollLeft = scrollLForList - rectItem.width/2 + 200;
-            } else if(rectItem.x > rectListContacts.x + rectListContacts.width/2 && 
-                rectItem.x < secondStAct &&
-                !item.classList.contains(css.itemContactActive)){
-                    itemsContact.forEach(i => i.classList.remove(css.itemContactActive));
-                    item.classList.add(css.itemContactActive);
-                    const scrollLForList = listContacts.current.scrollLeft;
-                    listContacts.current.style.scrollBehavior = 'smooth';
-                    listContacts.current.scrollLeft = scrollLForList + rectItem.width/2 - 100;
-                }
-        };
-
         const forScroll = () => {
             itemsContact.forEach(item => readRectItem(item));
         };
 
         listContacts.current.addEventListener('scroll', forScroll);
+
+        const autoScroll = (item, conditionForAutoSc = 0) => {
+            itemsContact.forEach(i => i.classList.remove(css.itemContactActive));
+                    item.classList.add(css.itemContactActive);
+                    const scrollLForList = listContacts.current.scrollLeft;
+                    listContacts.current.style.scrollBehavior = 'smooth';
+                    if(conditionForAutoSc !== 0){
+                        listContacts.current.scrollLeft = scrollLForList + conditionForAutoSc;
+                    };
+
+                    listContacts.current.removeEventListener('scroll', forScroll);
+                    setTimeout(() => {
+                        listContacts.current.addEventListener('scroll', forScroll);
+                    }, 1000);
+        };
+
+        itemsContact.forEach(item => item.addEventListener('click', () => {
+            const rectItem = item.getBoundingClientRect();
+            const rectListContacts = listContacts.current.getBoundingClientRect();
+            if(rectItem.x < rectListContacts.x + rectListContacts.width/2) {
+                const conditionForAutoSc = 0 - rectListContacts.width/2 + rectItem.x + 280;
+                autoScroll(item, conditionForAutoSc);
+            } else {
+                const conditionForAutoSc = 0  - rectListContacts.width/2 + rectItem.x + 80;
+                autoScroll(item, conditionForAutoSc);
+            }
+        }));
+
+        const readRectItem = (item) => {
+            const rectItem = item.getBoundingClientRect();
+            const rectListContacts = listContacts.current.getBoundingClientRect();
+            const startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 - 200;
+            const secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 200;
+            if(rectItem.x > startActive && 
+                rectItem.x < rectListContacts.x + rectListContacts.width/2 &&
+                !item.classList.contains(css.itemContactActive)){
+                    const conditionForAutoSc = 0 - rectItem.width/2 + 200;
+                autoScroll(item, conditionForAutoSc);
+            } else if(rectItem.x > rectListContacts.x + rectListContacts.width/2 && 
+                rectItem.x < secondStAct &&
+                !item.classList.contains(css.itemContactActive)){
+                    const conditionForAutoSc = 0 + rectItem.width/2 - 100;
+                    autoScroll(item, conditionForAutoSc);
+                }
+        };
     }, [contacts]);
 
     return(
