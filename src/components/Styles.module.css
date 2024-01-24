@@ -33,6 +33,14 @@
     margin-top: 10px;
 }
 
+.buttonRegisterForm{
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
 .phonebook, .contacts{
     font-size: 18px;
     font-weight: 700;

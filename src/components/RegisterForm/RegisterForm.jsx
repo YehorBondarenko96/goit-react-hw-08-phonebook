@@ -1,10 +1,19 @@
 import css from '../Styles.module.css';
 
 const RegisterForm = () => {
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const name = e.currentTarget.elements.name.value;
+        const email = e.currentTarget.elements.email.value;
+        const password = e.currentTarget.elements.password.value;
+        e.currentTarget.reset();
+    };
+
     return(
         <div className={css.divRegisterForm}>
         <h2 className={css.titleRegisterForm}>Registration in your Phonebook</h2>
-        <form className={css.registerForm}>
+        <form className={css.registerForm} onSubmit={handleSubmit}>
             <label className={css.labelRegisterForm}>
                 <span className={css.pRegisterForm}>Name</span>
             <input className={css.inputRegisterForm} 
@@ -31,7 +40,7 @@ const RegisterForm = () => {
             autoFocus
             placeholder="Please, enter your password" />
             </label>
-            <button className={css.button} type="submit">Add contact</button>
+            <button className={css.buttonRegisterForm} type="submit">Registration</button>
         </form>
         </div>
     )
