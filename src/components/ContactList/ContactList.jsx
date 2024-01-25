@@ -59,7 +59,7 @@ export const ContactList = () => {
 
     return(
         <>
-        {error ? (
+        {!error ? (
         <h2>Oopsss...Something went wrong...</h2>
         ) : (
         <div id='divForContactList' className={css.divForContactList} 
