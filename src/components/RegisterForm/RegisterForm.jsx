@@ -1,13 +1,16 @@
 import css from '../Styles.module.css';
+import { useDispatch } from 'react-redux';
+import { register } from '../../redux/workWithBackend/operations';
 
 const RegisterForm = () => {
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const name = e.currentTarget.elements.name.value;
         const email = e.currentTarget.elements.email.value;
         const password = e.currentTarget.elements.password.value;
-        e.currentTarget.reset();
+        dispatch(register({name, email, password}));
     };
 
     return(
@@ -35,10 +38,10 @@ const RegisterForm = () => {
                 <span className={css.pRegisterForm}>Password</span>
             <input className={css.inputRegisterForm} 
             name='password'
-            type="text"
+            type="password"
             autoComplete="off"
             autoFocus
-            placeholder="Please, enter your password" />
+            placeholder="The password must consist of at least 7 characters" />
             </label>
             <button className={css.buttonRegisterForm} type="submit">Registration</button>
         </form>
