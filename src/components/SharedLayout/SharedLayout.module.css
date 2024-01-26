@@ -1,0 +1,6 @@
+.headerSharedLayout{
+    padding: 30px 20px;
+    border-bottom: #fff 1px solid;
+    display: flex;
+    justify-content: space-between;
+}

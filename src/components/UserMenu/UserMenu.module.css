@@ -1,0 +1,8 @@
+.divUserMenu{
+    display: flex;
+    gap: 10px;
+}
+
+.pUserMenu{
+    margin: 0;
+}

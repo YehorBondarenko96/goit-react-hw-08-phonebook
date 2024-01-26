@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { fetchContacts } from "../../redux/opertions";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../Loader/Loader";
-import { searchForBackground } from '../../redux/searchForStyles';
 import { createNumbs } from '../../redux/backgroundImgSlice';
 
 export const ContactList = () => {
@@ -50,7 +49,6 @@ export const ContactList = () => {
 
     useEffect(() => {
         dispatch(fetchContacts());
-        dispatch(searchForBackground());
     }, [dispatch]);
 
     
@@ -59,7 +57,7 @@ export const ContactList = () => {
 
     return(
         <>
-        {!error ? (
+        {error ? (
         <h2>Oopsss...Something went wrong...</h2>
         ) : (
         <div id='divForContactList' className={css.divForContactList} 
