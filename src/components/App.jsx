@@ -31,7 +31,11 @@ export const App = () => {
         padding: 0
       }}
     >
-      <div style={{width: '100%'}}>
+      <div style={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: "column"
+      }}>
   <Routes>
     <Route path="/" element={<SharedLayout/>}>
     <Route index element={<Home/>}/>

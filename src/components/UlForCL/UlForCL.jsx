@@ -68,7 +68,7 @@ export const UlForCL = () => {
                     autoScroll(item, conditionForAutoSc);
                 }
         };
-    }, [contacts]);
+    }, [contacts, listContacts]);
 
     return(
         <ul ref={listContacts} className={css.listContacts}>

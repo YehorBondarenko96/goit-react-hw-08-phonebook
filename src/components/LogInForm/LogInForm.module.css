@@ -1,3 +1,12 @@
+.divLogInForm{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .titleLogInForm{
     text-align: center;
 }
@@ -10,7 +19,7 @@
     padding: 15px 0 10px 10px;
     gap: 50px;
     width: 500px;
-    margin: auto;
+    margin: 0;
 }
 
 .labelLogInForm{
