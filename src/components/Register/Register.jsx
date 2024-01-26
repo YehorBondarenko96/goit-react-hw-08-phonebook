@@ -1,7 +1,7 @@
 // import { Helmet } from "react-helmet";
 import RegisterForm from "components/RegisterForm/RegisterForm";
 
-const Register = () => {
+export default function Register(){
     return(
         <div>
       {/* <Helmet>
@@ -11,5 +11,3 @@ const Register = () => {
     </div>
     )
 };
-
-export default Register;

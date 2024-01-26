@@ -15,7 +15,7 @@ export const ContactForm = () => {
             const newNumb = evt.currentTarget.elements.number.value;
             const dataForAdd = {
                 name: newName,
-                phone: newNumb
+                number: newNumb
             }
             dispatch(addContact(dataForAdd));
             evt.currentTarget.reset();

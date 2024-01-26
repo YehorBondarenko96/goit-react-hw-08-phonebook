@@ -9,6 +9,8 @@ const Home = lazy(() => import('./Home/Home'))
 const Register = lazy(() => import("./Register/Register"));
 const PageUsers = lazy(() => import('./PageUsers/PageUsers'));
 const LoggedInOrNot = lazy(() => import('./LoggedInOrNot/LoggedInOrNot'));
+const NotLoggedOrY = lazy(() => import('./NotLoggedOrY/NotLoggedOrY'));
+const LogInForm = lazy(() => import('./LogInForm/LogInForm'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -36,7 +38,12 @@ export const App = () => {
     <Route path="/register" element={
       <LoggedInOrNot redirectTo='/contacts' component={<Register/>}/>
     }/>
-    <Route path="/contacts" element={<PageUsers/>}/>
+    <Route path="/login" element={
+      <LoggedInOrNot redirectTo='/contacts' component={<LogInForm/>}/>
+    }/>
+    <Route path="/contacts" element={
+      <NotLoggedOrY component={<PageUsers/>}/>
+    }/>
   </Route>
   </Routes>
 </div>

@@ -39,7 +39,7 @@ export const UlForCL = () => {
                     }, 1000);
         };
 
-        itemsContact.forEach(item => item.addEventListener('click', () => {
+        itemsContact.forEach(item => item.addEventListener('mouseenter', () => {
             const rectItem = item.getBoundingClientRect();
             const rectListContacts = listContacts.current.getBoundingClientRect();
             if(rectItem.x < rectListContacts.x + rectListContacts.width/2) {

@@ -1,10 +1,11 @@
-import css from '../Styles.module.css';
+import css from './RegisterForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../redux/workWithBackend/operations';
 import { selectError } from '../../redux/workWithBackend/selectors';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
+import { cleanError } from '../../redux/workWithBackend/slice';
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
@@ -12,7 +13,8 @@ const RegisterForm = () => {
 
     useEffect(() => {
         if(Number(error) === 400){toast.error('Invalid registration data')};
-    }, [error]);
+        dispatch(cleanError());
+    }, [error, dispatch]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
