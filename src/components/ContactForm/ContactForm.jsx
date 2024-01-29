@@ -1,5 +1,5 @@
 import { addContact } from '../../redux/opertions';
-import css from '../Styles.module.css';
+import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from '../../redux/selectors';
 
@@ -25,16 +25,16 @@ export const ContactForm = () => {
         };
 
     return (
-        <form className={css.form} onSubmit={updateStateForAdd}>
-            <label className={css.label}>
-                <span className={css.nameInput}>Name</span>
-            <input className={css.input} type="text" name="name" required />
+        <form className={css.formContactForm} onSubmit={updateStateForAdd}>
+            <label className={css.labelContactForm}>
+                <span className={css.nameInputContactForm}>Name</span>
+            <input className={css.inputContactForm} type="text" name="name" required />
             </label>
-            <label className={css.label}>
-                <span className={css.nameInput}>Number</span>
-                <input className={css.input} type="tel" name="number" required />
+            <label className={css.labelContactForm}>
+                <span className={css.nameInputContactForm}>Number</span>
+                <input className={css.inputContactForm} type="tel" name="number" required />
             </label>
-            <button className={css.button} type="submit">Add contact</button>
+            <button className={css.buttonContactForm} type="submit">Add contact</button>
         </form>
     )
 };

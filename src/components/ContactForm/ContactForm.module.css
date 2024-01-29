@@ -1,0 +1,29 @@
+.formContactForm{
+    display: flex;
+    border: none;
+    gap: 20px;
+    width: 100%;
+    margin-left: 20px;
+}
+
+.labelContactForm{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputContactForm{
+    width: 130px;
+    font-size: 14px;
+}
+
+.buttonContactForm{
+    width: 90px;
+    height: 22px;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+.nameInputContactForm{
+    font-size: 16px;
+}

@@ -10,15 +10,12 @@ const PageUsers = () => {
     const token = useSelector(selectToken);
     if (token) {
         axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-      }
+    }
     return(
         <>
-        <h1 className={css.phonebook}>Phonebook</h1>
-  <ContactForm />
-
-  <h2 className={css.contacts}>Contacts</h2>
-  <Filter />
-  <ContactList />
+        <ContactForm />
+        <Filter />
+        <ContactList />
         </>
     )
 };
