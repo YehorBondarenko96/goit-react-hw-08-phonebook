@@ -1,5 +1,15 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+// import { store } from "../store";
+
+// store.subscribe(() => {
+//     const token = store.getState().auth.token; 
+  
+//     if (token) {
+//         console.log('token: ', token);
+//       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//     }
+//   });
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 

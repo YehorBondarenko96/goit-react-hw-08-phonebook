@@ -18,7 +18,7 @@ import { authReducer } from "./workWithBackend/slice";
 const authConfig = {
     key: 'auth',
     storage,
-    whitelist: ['token'],
+    whitelist: ['token', 'isLoggedIn'],
 };
 
 export const store = configureStore({
@@ -34,7 +34,6 @@ export const store = configureStore({
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
         }),
-    // devTools: process.env.NODE_ENV === 'development',
 });
 
 export const persistor = persistStore(store);

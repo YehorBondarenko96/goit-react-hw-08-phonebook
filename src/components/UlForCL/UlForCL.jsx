@@ -34,12 +34,15 @@ export const UlForCL = () => {
                     };
 
                     listContacts.current.removeEventListener('scroll', forScroll);
+                    
                     setTimeout(() => {
-                        listContacts.current.addEventListener('scroll', forScroll);
-                    }, 1000);
+                        if(listContacts.current){
+                            listContacts.current.addEventListener('scroll', forScroll);
+                        }
+                    }, 250);
         };
 
-        itemsContact.forEach(item => item.addEventListener('mouseenter', () => {
+        itemsContact.forEach(item => item.addEventListener('click', () => {
             const rectItem = item.getBoundingClientRect();
             const rectListContacts = listContacts.current.getBoundingClientRect();
             if(rectItem.x < rectListContacts.x + rectListContacts.width/2) {
@@ -68,7 +71,7 @@ export const UlForCL = () => {
                     autoScroll(item, conditionForAutoSc);
                 }
         };
-    }, [contacts, listContacts]);
+    }, [contacts]);
 
     return(
         <ul ref={listContacts} className={css.listContacts}>

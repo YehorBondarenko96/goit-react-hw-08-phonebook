@@ -57,8 +57,8 @@ export const ItemContact = ({contact, index}) => {
             backgroundPosition: 'center', 
             }}>
                 <div className={css.divItemContact}>
-                    <h2 className={css.pItemContactsName}>{contact.name}:</h2> 
-                    <p className={css.pItemContactsNumber}>{contact.phone}</p>
+                    <h2 className={css.pItemContactsName}>{contact.name}</h2> 
+                    <p className={css.pItemContactsNumber}>{contact.number}</p>
                     <button id={contact.id} className={css.buttonDelete} type='button' onClick={updateStateForDelete}>
                         Delete
                     </button>
