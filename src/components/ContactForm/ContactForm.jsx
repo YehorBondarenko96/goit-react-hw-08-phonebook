@@ -20,6 +20,7 @@ export const ContactForm = () => {
             }
             dispatch(addContact(dataForAdd));
             evt.currentTarget.reset();
+            removeClasses();
         } else{
             alert(`${newName} is already in contacts.`)
         }
@@ -32,15 +33,23 @@ export const ContactForm = () => {
             modalDivContactForm.classList.add(css.modalDivContactFormActive);
             firstDivContactForm.classList.add(css.firstDivContactFormActive);
 
-            const removeClasses = (e) => {
-                if (e.target.classList.contains(css.modalDivContactFormActive)){
-                modalDivContactForm.removeEventListener('click', removeClasses);
-                modalDivContactForm.classList.remove(css.modalDivContactFormActive);
-                firstDivContactForm.classList.remove(css.firstDivContactFormActive);
-                };
-            };
-
             modalDivContactForm.addEventListener('click', removeClasses)
+        };
+
+        const removeClasses = (e) => {
+            const modalDivContactForm = document.querySelector('.modalDivContactForm');
+            const firstDivContactForm = document.querySelector('.firstDivContactForm');
+            if(e){
+            if (e.target.classList.contains(css.modalDivContactFormActive)){
+            modalDivContactForm.removeEventListener('click', removeClasses);
+            modalDivContactForm.classList.remove(css.modalDivContactFormActive);
+            firstDivContactForm.classList.remove(css.firstDivContactFormActive);
+            };
+        } else{
+            modalDivContactForm.removeEventListener('click', removeClasses);
+            modalDivContactForm.classList.remove(css.modalDivContactFormActive);
+            firstDivContactForm.classList.remove(css.firstDivContactFormActive);
+        }
         };
 
     return (
