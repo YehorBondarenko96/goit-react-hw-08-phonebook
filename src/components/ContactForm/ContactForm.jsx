@@ -2,6 +2,7 @@ import { addContact } from '../../redux/opertions';
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from '../../redux/selectors';
+// import { click } from '@testing-library/user-event/dist/click';
 
 export const ContactForm = () => {
     const dispatch = useDispatch();
@@ -24,8 +25,40 @@ export const ContactForm = () => {
         }
         };
 
+        function forAddButton(){
+            const modalDivContactForm = document.querySelector('.modalDivContactForm');
+            const firstDivContactForm = document.querySelector('.firstDivContactForm');
+
+            modalDivContactForm.classList.add(css.modalDivContactFormActive);
+            firstDivContactForm.classList.add(css.firstDivContactFormActive);
+
+            const removeClasses = (e) => {
+                if (e.target.classList.contains(css.modalDivContactFormActive)){
+                modalDivContactForm.removeEventListener('click', removeClasses);
+                modalDivContactForm.classList.remove(css.modalDivContactFormActive);
+                firstDivContactForm.classList.remove(css.firstDivContactFormActive);
+                };
+            };
+
+            modalDivContactForm.addEventListener('click', removeClasses)
+        };
+
     return (
-        <form className={css.formContactForm} onSubmit={updateStateForAdd}>
+        <div className={[css.modalDivContactForm, 'modalDivContactForm'].join(' ')}>
+            <div className={[css.firstDivContactForm, 'firstDivContactForm'].join(' ')}
+        style={{
+            // backgroundImage: `url(${img || reservedImg})`,
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center', 
+            }}>
+                <div className={css.divForMiniContactForm}>
+                    <button className={css.buttonAddMiniContactForm} type='button' onClick={forAddButton}>
+                        Add
+                    </button>
+                    </div>
+                <div className={css.divContactForm}>
+
+                <form className={css.formContactForm} onSubmit={updateStateForAdd}>
             <label className={css.labelContactForm}>
                 <span className={css.nameInputContactForm}>Name</span>
             <input className={css.inputContactForm} type="text" name="name" required />
@@ -36,5 +69,8 @@ export const ContactForm = () => {
             </label>
             <button className={css.buttonContactForm} type="submit">Add contact</button>
         </form>
+                </div>
+        </div>
+        </div>
     )
 };

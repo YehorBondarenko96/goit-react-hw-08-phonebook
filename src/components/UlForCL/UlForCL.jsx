@@ -9,7 +9,6 @@ export const UlForCL = () => {
     const filter = useSelector(selectFilter);
 
     const listContacts = useRef(null);
-    const itemContact = useRef([]);
 
     if(filter.length > 0) {
         contacts = contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()))
@@ -79,7 +78,7 @@ export const UlForCL = () => {
                 contacts.map((contact, index) => { 
                     
                     return(
-                    <li ref={itemContact[index]} key={contact.id} className={[css.itemContact, 'itemContact'].join(' ')}>
+                    <li key={contact.id} className={[css.itemContact, 'itemContact'].join(' ')}>
                     <ItemContact 
                         contact={contact}
                         index={contacts.indexOf(contact)}

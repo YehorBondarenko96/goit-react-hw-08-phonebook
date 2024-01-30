@@ -4,6 +4,7 @@ import { ContactList } from 'components/ContactList/ContactList';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../redux/workWithBackend/selectors';
+import css from './PageUsers.module.css';
 
 const PageUsers = () => {
     const token = useSelector(selectToken);
@@ -12,8 +13,10 @@ const PageUsers = () => {
     }
     return(
         <>
-        <ContactForm />
+        <div className={css.divContFiltPageUsers}>
         <Filter />
+        <ContactForm />
+        </div>
         <ContactList />
         </>
     )

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { searchForBackground } from "../redux/searchForStyles";
 
 const Home = lazy(() => import('./Home/Home'))
-const Register = lazy(() => import("./Register/Register"));
+const RegisterForm = lazy(() => import("./RegisterForm/RegisterForm"));
 const PageUsers = lazy(() => import('./PageUsers/PageUsers'));
 const LoggedInOrNot = lazy(() => import('./LoggedInOrNot/LoggedInOrNot'));
 const NotLoggedOrY = lazy(() => import('./NotLoggedOrY/NotLoggedOrY'));
@@ -40,7 +40,7 @@ export const App = () => {
     <Route path="/" element={<SharedLayout/>}>
     <Route index element={<Home/>}/>
     <Route path="/register" element={
-      <LoggedInOrNot redirectTo='/contacts' component={<Register/>}/>
+      <LoggedInOrNot redirectTo='/contacts' component={<RegisterForm/>}/>
     }/>
     <Route path="/login" element={
       <LoggedInOrNot redirectTo='/contacts' component={<LogInForm/>}/>
