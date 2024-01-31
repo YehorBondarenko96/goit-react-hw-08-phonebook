@@ -16,10 +16,9 @@ const forPending = (state) => {
 const forRejected = (state, action) => {
     state.isLoading = false;
     state.error = action.payload.replace(/\D/g, "");
-    console.log('state.error: ', state.error);
-    if(state.error === 401){
-        console.log('Y');
+    if(state.error === '401'){
         state.token = null;
+        state.isLoggedIn = false;
     }
 };
 
