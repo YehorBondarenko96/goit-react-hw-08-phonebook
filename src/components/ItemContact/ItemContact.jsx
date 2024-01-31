@@ -81,6 +81,8 @@ export const ItemContact = ({contact, index, id, activeId, actualScroll}) => {
                     closeChangingCWindow = {closeChangingCWindow} 
                     name = {contact.name}
                     number = {contact.number}
+                    id = {contact.id}
+                    actualScroll = {actualScroll}
                     />}
                 </div>
         </div>
