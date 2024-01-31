@@ -3,6 +3,7 @@ import { fetchContacts, addContact, deleteContact } from "./opertions";
 
 const contactsInitialState = {
     items: [],
+    scrollLeftLists: 0,
     isLoading: false,
     error: null
     };
@@ -16,6 +17,9 @@ const forRejected = (state, action) => {
 const contactsSlice = createSlice({
     name: 'contacts',
     initialState: contactsInitialState,
+    reducers:{
+        setScrollLeftLists(state, action){state.scrollLeftLists = action.payload}
+    },
     extraReducers: builder => {
         builder
         .addCase(fetchContacts.pending, forPending)
@@ -44,3 +48,4 @@ const contactsSlice = createSlice({
 });
 
 export const contactsReducer = contactsSlice.reducer;
+export const {setScrollLeftLists} = contactsSlice.actions;

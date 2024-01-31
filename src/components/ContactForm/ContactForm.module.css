@@ -134,13 +134,14 @@
     font-size: 5px;
     border: none;
     border-radius: 2px;
+    padding: 0 10px;
 }
 
 .firstDivContactFormActive .inputContactForm{
     width: 300px;
     height: 40px;
     border-radius: 10px;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .buttonContactForm{
@@ -163,5 +164,5 @@
 }
 
 .firstDivContactFormActive .nameInputContactForm{
-    font-size: 16px;
+    font-size: 20px;
 }

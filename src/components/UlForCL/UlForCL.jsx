@@ -1,14 +1,31 @@
 import css from "../Styles.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ItemContact } from "components/ItemContact/ItemContact";
-import { selectContacts, selectFilter } from "../../redux/selectors";
-import { useRef, useEffect } from "react";
+import { selectContacts, selectFilter, selectScrollLeftLists } from "../../redux/selectors";
+import { useRef, useEffect, useState } from "react";
+import { setScrollLeftLists } from "../../redux/contactsSlice";
 
 export const UlForCL = () => {
+    const dispatch = useDispatch();
     let contacts = useSelector(selectContacts);
     const filter = useSelector(selectFilter);
+    const scrollLeftLists = useSelector(selectScrollLeftLists);
+
+    const [activeId, setActiveId] = useState(null);
+    const [actualScroll, setActualScroll] = useState(0);
 
     const listContacts = useRef(null);
+
+
+
+    useEffect(() => {
+        if(scrollLeftLists > 0){
+            if(listContacts.current){
+                listContacts.current.scrollLeft = scrollLeftLists;
+                dispatch(setScrollLeftLists(0));
+            }
+        }
+    });
 
     if(filter.length > 0) {
         contacts = contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()))
@@ -18,6 +35,7 @@ export const UlForCL = () => {
         const itemsContact = document.querySelectorAll('.itemContact');
 
         const forScroll = () => {
+            setActualScroll(listContacts.current.scrollLeft);
             itemsContact.forEach(item => readRectItem(item));
         };
 
@@ -26,6 +44,7 @@ export const UlForCL = () => {
         const autoScroll = (item, conditionForAutoSc = 0) => {
             itemsContact.forEach(i => i.classList.remove(css.itemContactActive));
                     item.classList.add(css.itemContactActive);
+                    setActiveId(item.getAttribute('id'));
                     const scrollLForList = listContacts.current.scrollLeft;
                     listContacts.current.style.scrollBehavior = 'smooth';
                     if(conditionForAutoSc !== 0){
@@ -75,14 +94,15 @@ export const UlForCL = () => {
     return(
         <ul ref={listContacts} className={css.listContacts}>
             {contacts.length !== 0 &&
-                contacts.map((contact, index) => { 
-                    
+                contacts.map((contact) => { 
                     return(
-                    <li key={contact.id} className={[css.itemContact, 'itemContact'].join(' ')}>
+                    <li key={contact.id} id={contact.id} className={[css.itemContact, 'itemContact'].join(' ')}>
                     <ItemContact 
                         contact={contact}
                         index={contacts.indexOf(contact)}
-                        key={contact.id}
+                        id={contact.id}
+                        activeId={activeId}
+                        actualScroll={actualScroll}
                     />
                     </li>
                 )})

@@ -54,12 +54,7 @@ export const ContactForm = () => {
 
     return (
         <div className={[css.modalDivContactForm, 'modalDivContactForm'].join(' ')}>
-            <div className={[css.firstDivContactForm, 'firstDivContactForm'].join(' ')}
-        style={{
-            // backgroundImage: `url(${img || reservedImg})`,
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center', 
-            }}>
+            <div className={[css.firstDivContactForm, 'firstDivContactForm'].join(' ')}>
                 <div className={css.divForMiniContactForm}>
                     <button className={css.buttonAddMiniContactForm} type='button' onClick={forAddButton}>
                         Add

@@ -43,3 +43,5 @@ export const selectBackgrounds = createSelector(
 );
 
 export const selectNumbsForImg = state => state.backgroundImages.numbsForImg;
+
+export const selectScrollLeftLists = state => state.contacts.scrollLeftLists;
