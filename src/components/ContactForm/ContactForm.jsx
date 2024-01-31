@@ -29,26 +29,44 @@ export const ContactForm = () => {
         function forAddButton(){
             const modalDivContactForm = document.querySelector('.modalDivContactForm');
             const firstDivContactForm = document.querySelector('.firstDivContactForm');
+            const inputNameAdd = document.querySelector('.inputNameAdd');
 
             modalDivContactForm.classList.add(css.modalDivContactFormActive);
             firstDivContactForm.classList.add(css.firstDivContactFormActive);
+            
+            setTimeout(() => {
+                inputNameAdd.focus();
+            }, 100);
 
-            modalDivContactForm.addEventListener('click', removeClasses)
+            modalDivContactForm.addEventListener('click', removeClasses);
+            document.addEventListener('keydown', closeModalForEsc);
+        };
+
+        const closeModalForEsc = (e) => {
+            if(e.key === 'Escape'){
+                removeClasses();
+            }
         };
 
         const removeClasses = (e) => {
             const modalDivContactForm = document.querySelector('.modalDivContactForm');
             const firstDivContactForm = document.querySelector('.firstDivContactForm');
+            const inputsAdd = document.querySelectorAll('.inputsAdd');
+
+            function workRC(){
+                modalDivContactForm.removeEventListener('click', removeClasses);
+                document.removeEventListener('keydown', closeModalForEsc);
+                inputsAdd.forEach(input => input.blur());
+                modalDivContactForm.classList.remove(css.modalDivContactFormActive);
+                firstDivContactForm.classList.remove(css.firstDivContactFormActive);
+            };
+
             if(e){
             if (e.target.classList.contains(css.modalDivContactFormActive)){
-            modalDivContactForm.removeEventListener('click', removeClasses);
-            modalDivContactForm.classList.remove(css.modalDivContactFormActive);
-            firstDivContactForm.classList.remove(css.firstDivContactFormActive);
+            workRC();
             };
         } else{
-            modalDivContactForm.removeEventListener('click', removeClasses);
-            modalDivContactForm.classList.remove(css.modalDivContactFormActive);
-            firstDivContactForm.classList.remove(css.firstDivContactFormActive);
+            workRC();
         }
         };
 
@@ -65,11 +83,11 @@ export const ContactForm = () => {
                 <form className={css.formContactForm} onSubmit={updateStateForAdd}>
             <label className={css.labelContactForm}>
                 <span className={css.nameInputContactForm}>Name</span>
-            <input className={css.inputContactForm} type="text" name="name" required />
+            <input className={[css.inputContactForm,'inputNameAdd', 'inputsAdd'].join(' ')} type="text" name="name" required/>
             </label>
             <label className={css.labelContactForm}>
                 <span className={css.nameInputContactForm}>Number</span>
-                <input className={css.inputContactForm} type="tel" name="number" required />
+                <input className={[css.inputContactForm, 'inputsAdd'].join(' ')} type="tel" name="number" required />
             </label>
             <button className={css.buttonContactForm} type="submit">Add contact</button>
         </form>

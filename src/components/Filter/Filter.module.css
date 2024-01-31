@@ -1,0 +1,11 @@
+.inputFilter{
+    border: none;
+    border-radius: 10px;
+    width: 600px;
+    height: 40px;
+    padding: 0 10px;
+}
+
+.inputFilter::placeholder{
+    font-size: 18px;
+}
