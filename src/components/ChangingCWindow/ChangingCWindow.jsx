@@ -1,31 +1,24 @@
 import css from './ChangingCWindow.module.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectContacts } from '../../redux/selectors';
+import { useDispatch } from 'react-redux';
 import { patchContact } from '../../redux/opertions';
 import { setScrollLeftLists } from '../../redux/contactsSlice';
 
 export const ChangingCWindow = ({closeChangingCWindow, name, number, id, actualScroll}) => {
     const dispatch = useDispatch();
-    const namesContacts = useSelector(selectContacts).map(contact => contact.name);
 
     const updateStateForPatch = (evt) => {
         evt.preventDefault();
         const newName = evt.currentTarget.elements.name.value;
-        
-        if(!namesContacts.some(name => name.toLowerCase() === newName.toLowerCase())){
-            const idContact = id;
-            const newNumb = evt.currentTarget.elements.number.value;
-            const dataForPatch = {
-                id: idContact,
-                name: newName,
-                number: newNumb
-            }
-            dispatch(patchContact(dataForPatch));
-            evt.currentTarget.reset();
-            dispatch(setScrollLeftLists(actualScroll));
-        } else{
-            alert(`${newName} is already in contacts.`)
+        const idContact = id;
+        const newNumb = evt.currentTarget.elements.number.value;
+        const dataForPatch = {
+            id: idContact,
+            name: newName,
+            number: newNumb
         }
+        dispatch(patchContact(dataForPatch));
+        evt.currentTarget.reset();
+        dispatch(setScrollLeftLists(actualScroll));
         };
     return(
             <form className={css.formChangingCWindow} onSubmit={updateStateForPatch}>
