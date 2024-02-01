@@ -12,11 +12,11 @@ export const UlForCL = () => {
     const scrollLeftLists = useSelector(selectScrollLeftLists);
 
     const [activeId, setActiveId] = useState(null);
-    const [actualScroll, setActualScroll] = useState(0);
+    // const [actualScroll, setActualScroll] = useState(0);
+    const [listContHasEL, setListContHasEL] = useState(false);
 
     const listContacts = useRef(null);
-
-
+    const listContactsRef = listContacts.current;
 
     useEffect(() => {
         if(scrollLeftLists > 0){
@@ -43,11 +43,15 @@ export const UlForCL = () => {
         listContactsForGap.style.gap = screenWidth/(coef * 10) + 'px';
 
         const forScroll = () => {
-            setActualScroll(listContacts.current.scrollLeft);
+            // setActualScroll(listContacts.current.scrollLeft);
             itemsContact.forEach(item => readRectItem(item));
         };
 
-        listContacts.current.addEventListener('scroll', forScroll);
+        if(!listContHasEL && listContacts.current){
+            setListContHasEL(true);
+            listContacts.current.removeEventListener('scroll', forScroll);
+            listContacts.current.addEventListener('scroll', forScroll);
+        };
 
         const autoScroll = (item, conditionForAutoSc = 0) => {
             itemsContact.forEach(i => {
@@ -65,6 +69,7 @@ export const UlForCL = () => {
                         listContacts.current.scrollLeft = scrollLForList + conditionForAutoSc;
                     };
 
+                    listContacts.current.removeEventListener('scroll', forScroll);
                     listContacts.current.removeEventListener('scroll', forScroll);
                     
                     setTimeout(() => {
@@ -89,8 +94,8 @@ export const UlForCL = () => {
         const readRectItem = (item) => {
             const rectItem = item.getBoundingClientRect();
             const rectListContacts = listContacts.current.getBoundingClientRect();
-            const startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 - 200;
-            const secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 200;
+            const startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 + 50 - 100;
+            const secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 50 - 100;
             if(rectItem.x > startActive && 
                 rectItem.x < rectListContacts.x + rectListContacts.width/2 &&
                 !item.classList.contains(css.itemContactActive)){
@@ -103,7 +108,13 @@ export const UlForCL = () => {
                     autoScroll(item, conditionForAutoSc);
                 }
         };
-    }, [contacts]);
+
+        return () => {
+            if(listContactsRef){
+                listContactsRef.removeEventListener('scroll', forScroll);
+            }
+        }
+    }, [contacts, listContHasEL, listContactsRef]);
 
     return(
         <ul ref={listContacts} className={[css.listContacts, 'listContactsForGap'].join(' ')}>
@@ -116,7 +127,7 @@ export const UlForCL = () => {
                         index={contacts.indexOf(contact)}
                         id={contact.id}
                         activeId={activeId}
-                        actualScroll={actualScroll}
+                        // actualScroll={actualScroll}
                     />
                     </li>
                 )})
