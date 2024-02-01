@@ -1,6 +1,6 @@
 import css from '../Styles.module.css';
 import { UlForCL } from 'components/UlForCL/UlForCL';
-import { selectIsLoading, selectError, selectNumbsForImg, selectBackgrounds, selectBgGeneral } from '../../redux/selectors';
+import { selectIsLoading, selectError, selectNumbsForImg, selectBackgrounds } from '../../redux/selectors';
 import { useEffect } from "react";
 import { fetchContacts } from "../../redux/opertions";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,8 +16,8 @@ export const ContactList = () => {
     const isLoading = useSelector(selectIsLoading);
     const error = useSelector(selectError);
 
-    const bgGeneral = useSelector(selectBgGeneral)
-    const imgForBackground = bgGeneral ? bgGeneral.img : 'https://lh3.googleusercontent.com/pw/ABLVV84w_pNrNk2EMyul9WEZQIGgWoLvREgHEC97b4Mf15Ks5Hoqt7v7nc07QVJrbIMlK2LWegS0dAQKL6yuKPxHGHqTDwlQOCxOMGTWtrhzl73nYIFv9CWK4h9QUB2dvOTMfXj-twNVuqOHLhczMnZRTAvECg=w1920-h1080-s-no-gm?authuser=0';
+    // const bgGeneral = useSelector(selectBgGeneral);
+    // const imgForBackground = bgGeneral ? bgGeneral.img : 'https://lh3.googleusercontent.com/pw/ABLVV84w_pNrNk2EMyul9WEZQIGgWoLvREgHEC97b4Mf15Ks5Hoqt7v7nc07QVJrbIMlK2LWegS0dAQKL6yuKPxHGHqTDwlQOCxOMGTWtrhzl73nYIFv9CWK4h9QUB2dvOTMfXj-twNVuqOHLhczMnZRTAvECg=w1920-h1080-s-no-gm?authuser=0';
     
     const makeMassifNumbs = () => {
         const massifNumbers = [];
@@ -60,12 +60,7 @@ export const ContactList = () => {
         {error ? (
         <h2>Oopsss...Something went wrong...</h2>
         ) : (
-        <div id='divForContactList' className={css.divForContactList} 
-            style={{
-                backgroundImage: `url(${imgForBackground})`,
-                backgroundSize: 'cover', 
-                backgroundPosition: 'center', 
-                }}>
+        <div id='divForContactList' className={css.divForContactList}>
                 {isLoading && !error ? <Loader /> : <UlForCL />}
             </div>
             )}

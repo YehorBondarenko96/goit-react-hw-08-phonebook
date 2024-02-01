@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { lazy } from "react";
 import { SharedLayout } from "./SharedLayout/SharedLayout";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchForBackground } from "../redux/searchForStyles";
+import { selectBgGeneral } from "../redux/selectors";
 
 const Home = lazy(() => import('./Home/Home'))
 const RegisterForm = lazy(() => import("./RegisterForm/RegisterForm"));
@@ -15,6 +16,9 @@ const LogInForm = lazy(() => import('./LogInForm/LogInForm'));
 export const App = () => {
   const dispatch = useDispatch();
 
+  const bgGeneral = useSelector(selectBgGeneral)
+  const imgForBackground = bgGeneral ? bgGeneral.img : 'https://lh3.googleusercontent.com/pw/ABLVV84w_pNrNk2EMyul9WEZQIGgWoLvREgHEC97b4Mf15Ks5Hoqt7v7nc07QVJrbIMlK2LWegS0dAQKL6yuKPxHGHqTDwlQOCxOMGTWtrhzl73nYIFv9CWK4h9QUB2dvOTMfXj-twNVuqOHLhczMnZRTAvECg=w1920-h1080-s-no-gm?authuser=0';
+
   useEffect(() => {
     dispatch(searchForBackground());
   }, [dispatch]);
@@ -23,6 +27,9 @@ export const App = () => {
     <div
       style={{
         background: '#202020',
+        backgroundImage: `url(${imgForBackground})`,
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
         height: '100%',
         display: 'flex',
         fontSize: 20,

@@ -60,14 +60,29 @@ export const ItemContact = ({contact, index, id, activeId, actualScroll}) => {
         }
     }, [activeId, id]);
 
+    // useEffect(() => {
+    //     const coef = 2;
+    //     const screenWidth = window.innerWidth;
+    //     const firstDivsItemContact = document.querySelectorAll('.firstDivItemContact');
+    //     const divsItemContact = document.querySelectorAll('.divItemContact');
+    //     firstDivsItemContact.forEach(div => {
+    //         div.style.width = screenWidth/coef + 'px';
+    //         div.style.height = screenWidth/(coef * 1.667) + 'px';
+    //     });
+    //     divsItemContact.forEach(div => {
+    //         div.style.width = screenWidth/coef + 'px';
+    //         div.style.height = screenWidth/(coef * 1.667) + 'px';
+    //     });
+    // });
+
     return(
-        <div className={css.firstDivItemContact}
+        <div className={[css.firstDivItemContact, 'firstDivItemContact'].join(' ')}
         style={{
             backgroundImage: `url(${img || reservedImg})`,
             backgroundSize: 'cover', 
             backgroundPosition: 'center', 
             }}>
-                <div className={css.divItemContact}>
+                <div className={[css.divItemContact, 'divItemContact'].join(' ')}>
                     <h2 className={css.pItemContactsName}>{contact.name}</h2> 
                     <p className={css.pItemContactsNumber}>{contact.number}</p>
                     <button id={contact.id} className={css.buttonDelete} type='button' onClick={updateStateForDelete}>

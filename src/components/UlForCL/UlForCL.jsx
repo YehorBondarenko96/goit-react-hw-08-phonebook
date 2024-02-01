@@ -33,6 +33,12 @@ export const UlForCL = () => {
 
     useEffect(() => {
         const itemsContact = document.querySelectorAll('.itemContact');
+        const coef = 2;
+        const screenWidth = window.innerWidth;
+        itemsContact.forEach(i => {
+            i.style.minWidth = screenWidth/coef + 'px';
+            i.style.height = screenWidth/(coef * 1.667) + 'px';
+        });
 
         const forScroll = () => {
             setActualScroll(listContacts.current.scrollLeft);
@@ -42,7 +48,17 @@ export const UlForCL = () => {
         listContacts.current.addEventListener('scroll', forScroll);
 
         const autoScroll = (item, conditionForAutoSc = 0) => {
-            itemsContact.forEach(i => i.classList.remove(css.itemContactActive));
+            itemsContact.forEach(i => {
+
+                i.style.minWidth = screenWidth/coef + 'px';
+                i.style.height = screenWidth/(coef * 1.667) + 'px';
+
+                i.classList.remove(css.itemContactActive);
+            });
+
+                    item.style.minWidth = (screenWidth/coef * 1.4) + 'px';
+                    item.style.height = (screenWidth/(coef * 1.667) * 1.4) + 'px';
+
                     item.classList.add(css.itemContactActive);
                     setActiveId(item.getAttribute('id'));
                     const scrollLForList = listContacts.current.scrollLeft;
