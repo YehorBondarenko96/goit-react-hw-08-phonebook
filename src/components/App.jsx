@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { lazy } from "react";
 import { SharedLayout } from "./SharedLayout/SharedLayout";
 import { useDispatch } from "react-redux";
@@ -49,20 +49,9 @@ export const App = () => {
       <NotLoggedOrY component={<PageUsers/>}/>
     }/>
   </Route>
+  <Route path="*" element={<Navigate to="/" />} /> 
   </Routes>
 </div>
     </div>
   )
 };
-
-
-
-
-
-
-
-// {
-//   "name": "your-project",
-//   "version": "1.0.0",
-//   "proxy": "https://pixabay.com/"
-// }
