@@ -33,12 +33,14 @@ export const UlForCL = () => {
 
     useEffect(() => {
         const itemsContact = document.querySelectorAll('.itemContact');
+        const listContactsForGap = document.querySelector('.listContactsForGap');
         const coef = 2;
         const screenWidth = window.innerWidth;
         itemsContact.forEach(i => {
             i.style.minWidth = screenWidth/coef + 'px';
             i.style.height = screenWidth/(coef * 1.667) + 'px';
         });
+        listContactsForGap.style.gap = screenWidth/(coef * 10) + 'px';
 
         const forScroll = () => {
             setActualScroll(listContacts.current.scrollLeft);
@@ -49,16 +51,12 @@ export const UlForCL = () => {
 
         const autoScroll = (item, conditionForAutoSc = 0) => {
             itemsContact.forEach(i => {
-
                 i.style.minWidth = screenWidth/coef + 'px';
                 i.style.height = screenWidth/(coef * 1.667) + 'px';
-
                 i.classList.remove(css.itemContactActive);
             });
-
                     item.style.minWidth = (screenWidth/coef * 1.4) + 'px';
                     item.style.height = (screenWidth/(coef * 1.667) * 1.4) + 'px';
-
                     item.classList.add(css.itemContactActive);
                     setActiveId(item.getAttribute('id'));
                     const scrollLForList = listContacts.current.scrollLeft;
@@ -73,7 +71,7 @@ export const UlForCL = () => {
                         if(listContacts.current){
                             listContacts.current.addEventListener('scroll', forScroll);
                         }
-                    }, 250);
+                    }, 1000);
         };
 
         itemsContact.forEach(item => item.addEventListener('click', () => {
@@ -108,7 +106,7 @@ export const UlForCL = () => {
     }, [contacts]);
 
     return(
-        <ul ref={listContacts} className={css.listContacts}>
+        <ul ref={listContacts} className={[css.listContacts, 'listContactsForGap'].join(' ')}>
             {contacts.length !== 0 &&
                 contacts.map((contact) => { 
                     return(
