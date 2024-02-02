@@ -65,7 +65,8 @@ export const ItemContact = ({contact, index, id, activeId, actualScroll}) => {
 
     useEffect(() => {
         const coef = 2;
-        const screenWidth = window.innerWidth;
+        const realScreenWidth = window.innerWidth;
+        const screenWidth = realScreenWidth <= 1000 ? realScreenWidth : 1000;
         if(id !== activeId && firstDivItemContact && divItemContact && buttonCh && buttonDel){
             setActiveChenging(false);
             firstDivItemContact.style.borderRadius = screenWidth/(coef * 22) + 'px';

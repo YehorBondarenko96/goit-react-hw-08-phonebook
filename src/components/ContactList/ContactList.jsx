@@ -8,6 +8,7 @@ import { Loader } from "../Loader/Loader";
 import { createNumbs } from '../../redux/backgroundImgSlice';
 
 export const ContactList = () => {
+    const realScreenWidth = window.innerWidth;
     
     const backgrounds = useSelector(selectBackgrounds);
     const numbsForImg = useSelector(selectNumbsForImg);
@@ -16,9 +17,6 @@ export const ContactList = () => {
     const isLoading = useSelector(selectIsLoading);
     const error = useSelector(selectError);
 
-    // const bgGeneral = useSelector(selectBgGeneral);
-    // const imgForBackground = bgGeneral ? bgGeneral.img : 'https://lh3.googleusercontent.com/pw/ABLVV84w_pNrNk2EMyul9WEZQIGgWoLvREgHEC97b4Mf15Ks5Hoqt7v7nc07QVJrbIMlK2LWegS0dAQKL6yuKPxHGHqTDwlQOCxOMGTWtrhzl73nYIFv9CWK4h9QUB2dvOTMfXj-twNVuqOHLhczMnZRTAvECg=w1920-h1080-s-no-gm?authuser=0';
-    
     const makeMassifNumbs = () => {
         const massifNumbers = [];
         const lengthImgMas = backgrounds.length - 1;
@@ -51,16 +49,26 @@ export const ContactList = () => {
         dispatch(fetchContacts());
     }, [dispatch]);
 
-    
-
-
+    let varPadding = 20;
+    if(realScreenWidth > 1000){
+        varPadding = 50;
+    } else if(realScreenWidth > 500 && realScreenWidth <=1000){
+        varPadding = realScreenWidth/20;
+    } else{
+        varPadding = realScreenWidth/40;
+    }
 
     return(
         <>
         {error ? (
         <h2>Oopsss...Something went wrong...</h2>
         ) : (
-        <div id='divForContactList' className={css.divForContactList}>
+        <div id='divForContactList' className={css.divForContactList}
+        style={{
+            paddingLeft: varPadding,
+            paddingRight: varPadding,
+        }}
+        >
                 {isLoading && !error ? <Loader /> : <UlForCL />}
             </div>
             )}
