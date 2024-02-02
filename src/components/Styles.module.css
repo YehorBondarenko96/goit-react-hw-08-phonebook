@@ -12,7 +12,6 @@
     list-style: none;
     width: 100%;
     display: flex;
-    /* gap: 100px; */
     align-items: center;
     overflow: auto;
 
@@ -28,36 +27,22 @@
 }
 
 .itemContact{
-    font-size: 24px;
     padding: 0;
-    /* max-width: 500px;
-    max-height: 300px; */
-    /* height: 100%; */
-    border-radius: 20px;
     transition: min-width 250ms cubic-bezier(0.25, 0.1, 0.25, 1), max-height 250ms cubic-bezier(0.25, 0.1, 0.25, 1),
                 font-size 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .itemContactActive{
-    /* max-width: 700px;
-    max-height: 420px; */
     font-size: 36px;
 }
 
 .firstDivItemContact{
     padding: 0;
-    /* max-width: 500px;
-    max-height: 300px; */
     width: 100%;
     height: 100%;
     background-color: #949494;
-    border-radius: 20px;
     transition: min-height 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
-
-/* .itemContactActive .firstDivItemContact{
-    max-height: 420px;
-} */
 
 .divItemContact{
     color: yellow;
@@ -70,7 +55,6 @@
     gap: 10px;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
     position: relative;
 }
 
@@ -92,11 +76,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url('./ItemContact/delete-svgrepo-com.svg#Delete');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
     position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 35px;
-	height: 35px;
 	cursor: pointer;
     transition: border-color ease 0.5s, top 250ms cubic-bezier(0.25, 0.1, 0.25, 1),
                 right 250ms cubic-bezier(0.25, 0.1, 0.25, 1), width 250ms cubic-bezier(0.25, 0.1, 0.25, 1),
@@ -104,10 +88,6 @@
 }
 
 .itemContactActive .buttonDelete{
-    top: 33px;
-    right: 33px;
-    width: 58px;
-	height: 58px;
     border-width: 2px;
 }
 
@@ -115,32 +95,6 @@
 
 .buttonDelete:hover {
     border-color: #d3d3d3;
-}
-
-
-.buttonDelete::before,
-.buttonDelete::after {
-	content: '';
-	position: absolute;
-	display: block;
-	width: 24px;
-	height: 3px;
-	background: red;
-    transition: width 250ms cubic-bezier(0.25, 0.1, 0.25, 1), height 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.buttonDelete::before {
-	transform: rotate(45deg);
-}
-
-.buttonDelete::after {
-	transform: rotate(-45deg);
-}
-
-.itemContactActive .buttonDelete::before,
-.itemContactActive .buttonDelete::after {
-	width: 40px;
-	height: 5px;
 }
 
 .changeCBut{
@@ -151,15 +105,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 35px;
-    height: 35px;
     background-image: url('./ItemContact/pencil-svgrepo-com.svg#Layer_1');
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
     position: absolute;
-    top: 20px;
-    left: 20px;
     cursor: pointer;
     transition: border-color ease 0.5s, top 250ms cubic-bezier(0.25, 0.1, 0.25, 1),
                 left 250ms cubic-bezier(0.25, 0.1, 0.25, 1), width 250ms cubic-bezier(0.25, 0.1, 0.25, 1),
@@ -167,10 +117,6 @@
 }
 
 .itemContactActive .changeCBut{
-    top: 33px;
-    left: 33px;
-    width: 58px;
-	height: 58px;
     border-width: 2px;
 }
 

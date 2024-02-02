@@ -1,9 +1,9 @@
 import css from '../Styles.module.css';
-import {  useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../redux/opertions';
 import { selectNumbsForImg, selectBackgrounds, selectBackgroundImages, selectBgGeneral, selectReservedBG } from '../../redux/selectors';
 import { deleteNumb } from '../../redux/backgroundImgSlice';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { ChangingCWindow } from '../ChangingCWindow/ChangingCWindow';
 import { setScrollLeftLists } from '../../redux/contactsSlice';
 
@@ -21,6 +21,15 @@ export const ItemContact = ({contact, index, id, activeId, actualScroll}) => {
     const reservedBG = objReservedBg ? objReservedBg.img : extraReservedImg;
 
     const [activeChanging, setActiveChenging] = useState(false);
+
+    const firstDivItemContactRef= useRef(null);
+    const firstDivItemContact = firstDivItemContactRef.current;
+    const divItemContactRef = useRef(null);
+    const divItemContact = divItemContactRef.current;
+    const buttonChRef = useRef(null);
+    const buttonCh = buttonChRef.current;
+    const buttonDelRef = useRef(null);
+    const buttonDel = buttonDelRef.current;
 
     const updateStateForDelete = () => {
         const idContact = contact.id;
@@ -55,40 +64,48 @@ export const ItemContact = ({contact, index, id, activeId, actualScroll}) => {
     const closeChangingCWindow = () => {setActiveChenging(false)};
 
     useEffect(() => {
-        if(id !== activeId){
-            setActiveChenging(false)
+        const coef = 2;
+        const screenWidth = window.innerWidth;
+        if(id !== activeId && firstDivItemContact && divItemContact && buttonCh && buttonDel){
+            setActiveChenging(false);
+            firstDivItemContact.style.borderRadius = screenWidth/(coef * 22) + 'px';
+            divItemContact.style.borderRadius = screenWidth/(coef * 22) + 'px';
+            buttonCh.style.top = screenWidth/(coef * 22) + 'px';
+            buttonCh.style.left = screenWidth/(coef * 22) + 'px';
+            buttonDel.style.top = screenWidth/(coef * 22) + 'px';
+            buttonDel.style.right = screenWidth/(coef * 22) + 'px';
+            buttonDel.style.width = screenWidth/(coef * 13) + 'px';
+            buttonDel.style.height = screenWidth/(coef * 13) + 'px';
+            buttonCh.style.width = screenWidth/(coef * 13) + 'px';
+            buttonCh.style.height = screenWidth/(coef * 13) + 'px';
+        } else if(id === activeId && firstDivItemContact && divItemContact && buttonCh && buttonDel){
+            firstDivItemContact.style.borderRadius = screenWidth/(coef * 22) * 1.4 + 'px';
+            divItemContact.style.borderRadius = screenWidth/(coef * 22) * 1.4 + 'px';
+            buttonCh.style.top = screenWidth/(coef * 22) * 1.4 + 'px';
+            buttonCh.style.left = screenWidth/(coef * 22) * 1.4 + 'px';
+            buttonDel.style.top = screenWidth/(coef * 22) * 1.4 + 'px';
+            buttonDel.style.right = screenWidth/(coef * 22) * 1.4 + 'px';
+            buttonDel.style.width = screenWidth/(coef * 13) * 1.4 + 'px';
+            buttonDel.style.height = screenWidth/(coef * 13) * 1.4 + 'px';
+            buttonCh.style.width = screenWidth/(coef * 13) * 1.4 + 'px';
+            buttonCh.style.height = screenWidth/(coef * 13) * 1.4 + 'px';
         }
-    }, [activeId, id]);
-
-    // useEffect(() => {
-    //     const coef = 2;
-    //     const screenWidth = window.innerWidth;
-    //     const firstDivsItemContact = document.querySelectorAll('.firstDivItemContact');
-    //     const divsItemContact = document.querySelectorAll('.divItemContact');
-    //     firstDivsItemContact.forEach(div => {
-    //         div.style.width = screenWidth/coef + 'px';
-    //         div.style.height = screenWidth/(coef * 1.667) + 'px';
-    //     });
-    //     divsItemContact.forEach(div => {
-    //         div.style.width = screenWidth/coef + 'px';
-    //         div.style.height = screenWidth/(coef * 1.667) + 'px';
-    //     });
-    // });
+    }, [activeId, id, divItemContact, firstDivItemContact, buttonCh, buttonDel]);
 
     return(
-        <div className={[css.firstDivItemContact, 'firstDivItemContact'].join(' ')}
+        <div ref={firstDivItemContactRef} className={[css.firstDivItemContact, 'firstDivItemContact'].join(' ')}
         style={{
             backgroundImage: `url(${img || reservedImg})`,
             backgroundSize: 'cover', 
             backgroundPosition: 'center', 
             }}>
-                <div className={[css.divItemContact, 'divItemContact'].join(' ')}>
+                <div ref={divItemContactRef} className={[css.divItemContact, 'divItemContact'].join(' ')}>
                     <h2 className={css.pItemContactsName}>{contact.name}</h2> 
                     <p className={css.pItemContactsNumber}>{contact.number}</p>
-                    <button id={contact.id} className={css.buttonDelete} type='button' onClick={updateStateForDelete}>
+                    <button ref={buttonDelRef} id={contact.id} className={css.buttonDelete} type='button' onClick={updateStateForDelete}>
                         Delete
                     </button>
-                    <button type='button' className={css.changeCBut} onClick = {() => setActiveChenging(true)}>
+                    <button ref={buttonChRef} type='button' className={css.changeCBut} onClick = {() => setActiveChenging(true)}>
                         Change contact
                     </button>
                     {activeChanging && 

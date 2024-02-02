@@ -39,6 +39,8 @@ export const UlForCL = () => {
         itemsContact.forEach(i => {
             i.style.minWidth = screenWidth/coef + 'px';
             i.style.height = screenWidth/(coef * 1.667) + 'px';
+            i.style.fontSize = screenWidth/(coef * 19) + 'px'; 
+            i.style.borderRadius = screenWidth/(coef * 22) + 'px';
         });
         listContactsForGap.style.gap = screenWidth/(coef * 10) + 'px';
 
@@ -57,10 +59,14 @@ export const UlForCL = () => {
             itemsContact.forEach(i => {
                 i.style.minWidth = screenWidth/coef + 'px';
                 i.style.height = screenWidth/(coef * 1.667) + 'px';
+                i.style.fontSize = screenWidth/(coef * 19) + 'px'; 
+                i.style.borderRadius = screenWidth/(coef * 22) + 'px';
                 i.classList.remove(css.itemContactActive);
             });
-                    item.style.minWidth = (screenWidth/coef * 1.4) + 'px';
-                    item.style.height = (screenWidth/(coef * 1.667) * 1.4) + 'px';
+                    item.style.minWidth = screenWidth/coef * 1.4 + 'px';
+                    item.style.height = screenWidth/(coef * 1.667) * 1.4 + 'px';
+                    item.style.fontSize = screenWidth/(coef * 19) * 1.4 + 'px'; 
+                    item.style.borderRadius = screenWidth/(coef * 22) * 1.4 + 'px';
                     item.classList.add(css.itemContactActive);
                     setActiveId(item.getAttribute('id'));
                     const scrollLForList = listContacts.current.scrollLeft;
