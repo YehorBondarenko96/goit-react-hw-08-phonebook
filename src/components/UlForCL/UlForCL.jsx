@@ -128,13 +128,9 @@ export const UlForCL = () => {
             } else if(realScreenWidth < 400 && realScreenWidth >= 350){
                 firShiftVar = 121;
                 secShiftVar = 46;
-            } else if(realScreenWidth < 350 
-                // && realScreenWidth >= 700
-                ){
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            } else if(realScreenWidth < 350){
                 firShiftVar = 105;
-                secShiftVar = 41;
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                secShiftVar = 36;
             }
             if(rectItem.x < rectListContacts.x + rectListContacts.width/2) {
                 const conditionForAutoSc = 0 - rectListContacts.width/2 + rectItem.x + firShiftVar;
@@ -148,17 +144,36 @@ export const UlForCL = () => {
         const readRectItem = (item) => {
             const rectItem = item.getBoundingClientRect();
             const rectListContacts = listContacts.current.getBoundingClientRect();
-            const startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 + 50 - 270;
-            const secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 50 - 270;
+            let startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 + 50 - 270;
+            let secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 50 - 270;
+            let firstMove = 200;
+            let secondMove = 100;
+            if(realScreenWidth <= 650 && realScreenWidth > 500){
+                startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 + 50 - 170;
+                secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 50 - 170;
+                firstMove = 150;
+            } else if(realScreenWidth <= 500 && realScreenWidth > 450){
+                startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 + 50 - 170;
+                secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 50 - 170;
+                firstMove = 130;
+            } else if(realScreenWidth <= 450 && realScreenWidth > 350){
+                startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 + 50 - 100;
+                secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 50 - 100;
+                firstMove = 100;
+            } else if(realScreenWidth <= 350){
+                startActive = rectListContacts.x;
+                secondStAct = rectListContacts.x + rectListContacts.width/2 + rectItem.width/2 - 50 - 60;
+                firstMove = 80;
+            }
             if(rectItem.x > startActive && 
                 rectItem.x < rectListContacts.x + rectListContacts.width/2 &&
                 !item.classList.contains(css.itemContactActive)){
-                    const conditionForAutoSc = 0 - rectItem.width/2 + 200;
+                    const conditionForAutoSc = 0 - rectItem.width/2 + firstMove;
                 autoScroll(item, conditionForAutoSc);
             } else if(rectItem.x > rectListContacts.x + rectListContacts.width/2 && 
                 rectItem.x < secondStAct &&
                 !item.classList.contains(css.itemContactActive)){
-                    const conditionForAutoSc = 0 + rectItem.width/2 - 100;
+                    const conditionForAutoSc = 0 + rectItem.width/2 - secondMove;
                     autoScroll(item, conditionForAutoSc);
                 }
         };
