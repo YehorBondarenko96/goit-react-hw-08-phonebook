@@ -18,11 +18,10 @@ const Home = () => {
         ) : (
             <>
             <Link to={'/login'}>
-            <button className={css.buttonHome}>I have <span className={css.logoNameBtnHome}>MyPhoneBook</span></button>
+            <button className={css.buttonHome}>Log in <span className={css.logoNameBtnHome}>MyPhoneBook</span></button>
             </Link>
             <Link to={'/register'}>
-            <button className={css.buttonHome}>I haven't <span className={css.logoNameBtnHome}>MyPhoneBook</span>, 
-            <br/>but I want will have that</button>
+            <button className={css.buttonHome}>Sign in <span className={css.logoNameBtnHome}>MyPhoneBook</span></button>
             </Link>
             </>
         )}
