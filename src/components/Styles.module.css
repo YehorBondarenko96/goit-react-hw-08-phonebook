@@ -123,3 +123,14 @@
 .changeCBut:hover {
     border-color: #d3d3d3;
 }
+
+
+
+@media 
+(min-height: 365px) and
+        (max-height: 465px)
+        {
+            .divForContactList{
+                margin-bottom: 150px;
+            }
+        }
