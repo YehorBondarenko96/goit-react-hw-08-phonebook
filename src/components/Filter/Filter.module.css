@@ -15,5 +15,6 @@
 }
 
 .inputFilter::placeholder{
-    font-size: 18px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
 }

@@ -126,11 +126,20 @@
 
 
 
-@media 
-(min-height: 365px) and
+@media (min-height: 365px) and
         (max-height: 465px)
         {
             .divForContactList{
                 margin-bottom: 150px;
+            }
+        }
+
+
+
+@media (max-height: 365px) and
+        (max-width: 601px)
+        {
+            .divForContactList{
+                margin-bottom: 95px;
             }
         }
