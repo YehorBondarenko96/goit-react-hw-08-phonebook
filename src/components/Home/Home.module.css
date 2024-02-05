@@ -12,6 +12,7 @@
     flex-direction: column;
     justify-content: center;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 .hlHome{
@@ -41,6 +42,14 @@
     font-weight: 700;
 }
 
+.letterHome{
+    /* background-color: rgba(225, 225, 225, 0.5); */
+    /* border: #fff solid 1px; */
+    /* border-radius: 50%; */
+    color: rgba(255, 255, 255, 0.5);
+    -webkit-text-stroke: 1px #fff;
+}
+
 .buttonsHome{
     display: flex;
     align-items: center;
@@ -52,14 +61,14 @@
     width: 200px;
     border: none;
     border-radius: 20px;
-    margin: 0 10px;
+    margin: 0 10px 10px 10px;
     padding: 10px;
 }
 
-.logoNameBtnHome{
+/* .logoNameBtnHome{
     font-size: 14px;
     font-weight: 700;
-}
+} */
 
 
 
@@ -78,7 +87,7 @@
         width: 140px;
         border: none;
         border-radius: 20px;
-        margin: 0 5px;
+        margin: 0 5px 10px 5px;
         padding: 5px;
         font-size: 12px;
     }
