@@ -59,7 +59,7 @@ export const ContactList = () => {
     }
 
     return(
-        <>
+        <div className={css.allDivContactList}>
         {error ? (
         <h2>Oopsss...Something went wrong...</h2>
         ) : (
@@ -72,6 +72,6 @@ export const ContactList = () => {
                 {isLoading && !error ? <Loader /> : <UlForCL />}
             </div>
             )}
-        </>
+        </div>
     )
 }
