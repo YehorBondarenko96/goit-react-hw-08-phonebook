@@ -8,7 +8,27 @@
 }
 
 .greetingHome{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-bottom: 30px;
+}
+
+.hlHome{
+    font-size: 0px;
+    content: '';
+    color: transparent;
+    margin: 0;
+    opacity: 0;
+}
+
+.logoHome{
+    margin-bottom: 20px;
+    height: 200px;
+    background-image: url('../contacts-svgrepo-com.svg#ContactsBook');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .hllGreetingHome{
@@ -66,5 +86,19 @@
     .logoNameBtnHome{
         font-size: 14px;
         font-weight: 700;
+    }
+}
+
+
+
+@media (max-height: 550px){
+    .greetingHome{
+        margin: 0;
+    }
+
+    .logoHome{
+        margin: 0;
+        height: 150px;
+        background-size: 40%
     }
 }
