@@ -18,7 +18,8 @@
     justify-content: center;
     padding: 15px 0 10px 10px;
     gap: 50px;
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     margin: 0;
 }
 
@@ -32,7 +33,7 @@
 
 .inputRegisterForm{
     display: inline-block;
-    width: 100%;
+    width: calc(100% - 10px);
     height: 30px;
     font-size: 18px;
     border: none;
@@ -42,10 +43,41 @@
     margin-top: 10px;
 }
 
+.inputRegisterForm::placeholder{
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
 .buttonRegisterForm{
     width: 150px;
     height: 30px;
     border: none;
     border-radius: 20px;
     font-size: 14px;
+}
+
+
+
+@media (max-width: 550px){
+    .registerForm{
+        max-width: 300px;
+        gap: 30px;
+    }
+}
+
+
+
+@media (max-width: 350px){
+    .registerForm{
+        max-width: 250px;
+        gap: 20px;
+    }
+}
+
+
+
+@media (max-height: 520px){
+    .titleRegisterForm{
+        margin: 0;
+    }
 }

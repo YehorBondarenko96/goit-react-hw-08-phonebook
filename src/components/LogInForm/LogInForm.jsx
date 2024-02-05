@@ -4,14 +4,16 @@ import { logIn } from '../../redux/workWithBackend/operations';
 import { selectError } from '../../redux/workWithBackend/selectors';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { cleanError } from '../../redux/workWithBackend/slice';
 
 const LogInForm = () => {
     const dispatch = useDispatch();
     const error = useSelector(selectError);
+    const [realScreenWidth, setRealScreenWidth] = useState(null);
 
     useEffect(() => {
+        setRealScreenWidth(window.innerWidth);
         if(Number(error) === 400){toast.error('Invalid login credentials')};
         dispatch(cleanError());
     }, [error, dispatch]);
@@ -43,9 +45,10 @@ const LogInForm = () => {
                 type="password"
                 autoComplete="off"
                 autoFocus
-                placeholder="The password must consist of at least 7 characters" />
+                placeholder= {realScreenWidth > 550 ? "The password must consist of at least 7 characters" : "Password: min. 7 chars."} 
+                />
                 </label>
-                <button className={css.buttonLogInForm} type="submit">Log In</button>
+                <button className={css.buttonLogInForm} type="submit">Sign in</button>
             </form>
             <ToastContainer />
             </div>

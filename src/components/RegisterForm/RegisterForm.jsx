@@ -4,14 +4,16 @@ import { register } from '../../redux/workWithBackend/operations';
 import { selectError } from '../../redux/workWithBackend/selectors';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { cleanError } from '../../redux/workWithBackend/slice';
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
     const error = useSelector(selectError);
+    const [realScreenWidth, setRealScreenWidth] = useState(null);
 
     useEffect(() => {
+        setRealScreenWidth(window.innerWidth);
         if(Number(error) === 400){toast.error('Invalid registration data')};
         dispatch(cleanError());
     }, [error, dispatch]);
@@ -52,7 +54,8 @@ const RegisterForm = () => {
                 type="password"
                 autoComplete="off"
                 autoFocus
-                placeholder="The password must consist of at least 7 characters" />
+                placeholder= {realScreenWidth > 550 ? "The password must consist of at least 7 characters" : "Password: min. 7 chars."} 
+                />
                 </label>
                 <button className={css.buttonRegisterForm} type="submit">Registration</button>
             </form>

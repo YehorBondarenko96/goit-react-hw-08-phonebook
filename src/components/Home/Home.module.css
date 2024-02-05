@@ -40,3 +40,31 @@
     font-size: 14px;
     font-weight: 700;
 }
+
+
+
+@media (max-width: 450px) {
+    .hllGreetingHome{
+        font-size: 24px;
+    }
+
+    .logoNameGreetingHome{
+        font-size: 36px;
+    }
+
+    .buttonHome{
+        min-height: 50px;
+        height: 100%;
+        width: 140px;
+        border: none;
+        border-radius: 20px;
+        margin: 0 5px;
+        padding: 5px;
+        font-size: 12px;
+    }
+    
+    .logoNameBtnHome{
+        font-size: 14px;
+        font-weight: 700;
+    }
+}
