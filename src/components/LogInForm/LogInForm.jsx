@@ -27,7 +27,10 @@ const LogInForm = () => {
 
     return(
         <div className={css.divLogInForm}>
-            <h2 className={css.titleLogInForm}>Log In in your Phonebook</h2>
+            <h2 className={css.titleLogInForm}>Log in your <span className={css.logoNameGreetingLogInForm}>
+            <span className={css.letterLogInForm}>C</span>ontactHu<span className={css.letterLogInForm}>b</span>
+            </span>
+            </h2>
             <form className={css.logInForm} onSubmit={handleSubmit}>
                 <label className={css.labelLogInForm}>
                     <span className={css.pRegLogInForm}>Email</span>

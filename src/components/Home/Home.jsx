@@ -13,7 +13,9 @@ const Home = () => {
             <use href="../contacts-svgrepo-com.svg#ContactsBook"></use>
             </svg>
         <h2 className={css.hllGreetingHome}>Welcome to </h2>
-        <span className={css.logoNameGreetingHome}><span className={css.letterHome}>C</span>ontactHu<span className={css.letterHome}>b</span></span>
+        <span className={css.logoNameGreetingHome}>
+            <span className={css.letterHome}>C</span>ontactHu<span className={css.letterHome}>b</span>
+            </span>
         <p className={css.sloganHome}>Find easily, Store conveniently</p>
         </div>
         <div className={css.buttonsHome}>

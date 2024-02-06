@@ -11,7 +11,7 @@ const UserMenu = () => {
         <div className={css.divUserMenu}>
             <p className={css.pUserMenu}>{usEmail}</p>
             <Link to={'/'}>
-            <button className={css.buttonUserMenu} onClick={() => {dispatch(logOut())}}>Logout</button>
+            <button className={css.buttonUserMenu} onClick={() => {dispatch(logOut())}}>Log out</button>
             </Link>
         </div>
     )

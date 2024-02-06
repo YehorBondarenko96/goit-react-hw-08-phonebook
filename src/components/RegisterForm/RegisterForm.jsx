@@ -28,7 +28,9 @@ const RegisterForm = () => {
 
     return(
         <div className={css.divRegisterForm}>
-            <h2 className={css.titleRegisterForm}>Registration in your Phonebook</h2>
+            <h2 className={css.titleRegisterForm}>Registration in your <span className={css.logoNameGreetingRegisterForm}>
+            <span className={css.letterRegisterForm}>C</span>ontactHu<span className={css.letterRegisterForm}>b</span>
+            </span></h2>
             <form className={css.registerForm} onSubmit={handleSubmit}>
                 <label className={css.labelRegisterForm}>
                     <span className={css.pRegisterForm}>Name</span>

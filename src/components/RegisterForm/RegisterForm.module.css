@@ -13,6 +13,15 @@
     margin-right: 20px;
 }
 
+.logoNameGreetingRegisterForm{
+    font-size: 36px;
+}
+
+.letterRegisterForm{
+    color: rgba(255, 255, 255, 0.5);
+    -webkit-text-stroke: 1px #fff;
+}
+
 .registerForm{
     display: flex;
     flex-direction: column;
