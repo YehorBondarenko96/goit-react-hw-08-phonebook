@@ -12,30 +12,43 @@ export const UlForCL = () => {
     const scrollLeftLists = useSelector(selectScrollLeftLists);
 
     const [activeId, setActiveId] = useState(null);
-    const [actualScroll, setActualScroll] = useState(0);
     const [listContHasEL, setListContHasEL] = useState(false);
+    const [realScreenWidth, setRealScreenWidth] = useState(null);
+    // const [topScrollPage, setTopScrollPage] = useState(0);
+    // setInterval(() => {console.log(realScreenWidth)}, 1000);
 
     const listContacts = useRef(null);
     const listContactsRef = listContacts.current;
 
     useEffect(() => {
+        const forOrientation = () => {
+            setTimeout(() => {
+                setRealScreenWidth(window.innerWidth);
+            }, 100);
+        };
+        forOrientation();
+        window.addEventListener('orientationchange', forOrientation);
+    }, []);
+
+    useEffect(() => {
         if(scrollLeftLists > 0){
             if(listContacts.current){
-                listContacts.current.scrollLeft = scrollLeftLists + 50;
+                setTimeout(() => {
+                    listContacts.current.scrollLeft = scrollLeftLists;
+                }, 100);
                 dispatch(setScrollLeftLists(0));
             }
         }
-    });
+    }, [scrollLeftLists, dispatch]);
 
     if(filter.length > 0) {
         contacts = contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()))
     };
 
     useEffect(() => {
-        const itemsContact = document.querySelectorAll('.itemContact');
+            const itemsContact = document.querySelectorAll('.itemContact');
         const listContactsForGap = document.querySelector('.listContactsForGap');
         const coef = 2;
-        const realScreenWidth = window.innerWidth;
         const screenWidth = realScreenWidth <= 1000 ? realScreenWidth : 1000;
         itemsContact.forEach(i => {
             i.style.minWidth = screenWidth/coef + 'px';
@@ -45,29 +58,42 @@ export const UlForCL = () => {
         });
         listContactsForGap.style.gap = screenWidth/(coef * 10) + 'px';
 
-        const forScroll = () => {
-            setActualScroll(listContacts.current.scrollLeft);
-            itemsContact.forEach(item => readRectItem(item));
+        const forBackgroundAllPage = () => {
+            const realScreenHeight = window.innerHeight;
+                    const header = document.querySelector('header');
+                    const main = document.querySelector('main');
+                    const headerHeight = header.getBoundingClientRect().height;
+                    const mainHeight = main.getBoundingClientRect().height;
+                    const pageHeight = headerHeight + mainHeight;
+                    const body = document.querySelector('body');
+                        body.style.height = '100%';
+                        const root = document.querySelector('#root');
+                        root.style.height = '100%';
+                        const html = document.querySelector('html');
+                        html.style.height = '100%';
+                    if(realScreenHeight < pageHeight && contacts.length > 0){
+                        body.style.height = 'auto';
+                        root.style.height = 'auto';
+                        html.style.height = 'auto';
+                    }
         };
 
-        if(!listContHasEL && listContacts.current){
-            setListContHasEL(true);
-            listContacts.current.removeEventListener('scroll', forScroll);
-            listContacts.current.addEventListener('scroll', forScroll);
-        };
+        forBackgroundAllPage();
 
-        const autoScroll = (item, conditionForAutoSc = 0) => {
+        
+
+        const autoScroll = (item, conditionForAutoSc = 0, scW) => {
             itemsContact.forEach(i => {
-                i.style.minWidth = screenWidth/coef + 'px';
-                i.style.height = screenWidth/(coef * 1.667) + 'px';
-                i.style.fontSize = screenWidth/(coef * 19) + 'px'; 
-                i.style.borderRadius = screenWidth/(coef * 22) + 'px';
+                i.style.minWidth = scW/coef + 'px';
+                i.style.height = scW/(coef * 1.667) + 'px';
+                i.style.fontSize = scW/(coef * 19) + 'px'; 
+                i.style.borderRadius = scW/(coef * 22) + 'px';
                 i.classList.remove(css.itemContactActive);
             });
-                    item.style.minWidth = screenWidth/coef * 1.4 + 'px';
-                    item.style.height = screenWidth/(coef * 1.667) * 1.4 + 'px';
-                    item.style.fontSize = screenWidth/(coef * 19) * 1.4 + 'px'; 
-                    item.style.borderRadius = screenWidth/(coef * 22) * 1.4 + 'px';
+                    item.style.minWidth = scW/coef * 1.4 + 'px';
+                    item.style.height = scW/(coef * 1.667) * 1.4 + 'px';
+                    item.style.fontSize = scW/(coef * 19) * 1.4 + 'px'; 
+                    item.style.borderRadius = scW/(coef * 22) * 1.4 + 'px';
                     item.classList.add(css.itemContactActive);
                     setActiveId(item.getAttribute('id'));
                     const scrollLForList = listContacts.current.scrollLeft;
@@ -76,17 +102,19 @@ export const UlForCL = () => {
                         listContacts.current.scrollLeft = scrollLForList + conditionForAutoSc;
                     };
 
-                    listContacts.current.removeEventListener('scroll', forScroll);
-                    listContacts.current.removeEventListener('scroll', forScroll);
-                    
+                    forBackgroundAllPage();
+
+                    listContacts.current.removeEventListener('scroll', () => forScroll(screenWidth));
+                    listContacts.current.removeEventListener('scroll', () => forScroll(screenWidth));
                     setTimeout(() => {
                         if(listContacts.current){
-                            listContacts.current.addEventListener('scroll', forScroll);
+                            listContacts.current.addEventListener('scroll', () => forScroll(screenWidth));
                         }
                     }, 500);
         };
 
         itemsContact.forEach(item => item.addEventListener('click', () => {
+            // setTopScrollPage(document.documentElement.scrollTop);
             const rectItem = item.getBoundingClientRect();
             const rectListContacts = listContacts.current.getBoundingClientRect();
             let firShiftVar = 260;
@@ -134,14 +162,14 @@ export const UlForCL = () => {
             }
             if(rectItem.x < rectListContacts.x + rectListContacts.width/2) {
                 const conditionForAutoSc = 0 - rectListContacts.width/2 + rectItem.x + firShiftVar;
-                autoScroll(item, conditionForAutoSc);
+                autoScroll(item, conditionForAutoSc, screenWidth);
             } else {
                 const conditionForAutoSc = 0  - rectListContacts.width/2 + rectItem.x + secShiftVar;
-                autoScroll(item, conditionForAutoSc);
+                autoScroll(item, conditionForAutoSc, screenWidth);
             }
         }));
 
-        const readRectItem = (item) => {
+        const readRectItem = (item, scW) => {
             const rectItem = item.getBoundingClientRect();
             const rectListContacts = listContacts.current.getBoundingClientRect();
             let startActive = rectListContacts.x + rectListContacts.width/2 - rectItem.width/2 + 50 - 270;
@@ -169,21 +197,32 @@ export const UlForCL = () => {
                 rectItem.x < rectListContacts.x + rectListContacts.width/2 &&
                 !item.classList.contains(css.itemContactActive)){
                     const conditionForAutoSc = 0 - rectItem.width/2 + firstMove;
-                autoScroll(item, conditionForAutoSc);
+                autoScroll(item, conditionForAutoSc, scW);
             } else if(rectItem.x > rectListContacts.x + rectListContacts.width/2 && 
                 rectItem.x < secondStAct &&
                 !item.classList.contains(css.itemContactActive)){
                     const conditionForAutoSc = 0 + rectItem.width/2 - secondMove;
-                    autoScroll(item, conditionForAutoSc);
+                    autoScroll(item, conditionForAutoSc, scW);
                 }
         };
+
+        const forScroll = (scW) => {
+            itemsContact.forEach(item => readRectItem(item, scW));
+        };
+
+        if(!listContHasEL && listContacts.current){
+            setListContHasEL(true);
+            listContacts.current.removeEventListener('scroll', () => forScroll(screenWidth));
+            listContacts.current.addEventListener('scroll', () => forScroll(screenWidth));
+        };
+        
 
         return () => {
             if(listContactsRef){
                 listContactsRef.removeEventListener('scroll', forScroll);
             }
         }
-    }, [contacts, listContHasEL, listContactsRef]);
+    }, [contacts, listContHasEL, listContactsRef, realScreenWidth]);
 
     return(
         <ul ref={listContacts} className={[css.listContacts, 'listContactsForGap'].join(' ')}>
@@ -196,7 +235,6 @@ export const UlForCL = () => {
                         index={contacts.indexOf(contact)}
                         id={contact.id}
                         activeId={activeId}
-                        actualScroll={actualScroll}
                     />
                     </li>
                 )})

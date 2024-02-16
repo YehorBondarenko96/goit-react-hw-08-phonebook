@@ -2,7 +2,7 @@ import { addContact } from '../../redux/opertions';
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from '../../redux/selectors';
-// import { click } from '@testing-library/user-event/dist/click';
+import { useEffect } from 'react';
 
 export const ContactForm = () => {
     const dispatch = useDispatch();
@@ -70,10 +70,32 @@ export const ContactForm = () => {
         }
         };
 
+        useEffect(() => {
+            const divForMiniContactForm = document.querySelector('.divForMiniContactForm');
+            const firstDivContactForm = document.querySelector('.firstDivContactForm');
+            const labelFilter = document.querySelector('.labelFilter');
+
+            const forHoverEnter = () => {
+                firstDivContactForm.classList.add(css.divForMiniContactFormHover);
+                if(labelFilter){
+                    labelFilter.style.marginRight = '155px';
+                };
+            };
+            const forHoverLeave = () => {
+                firstDivContactForm.classList.remove(css.divForMiniContactFormHover);
+                if(labelFilter){
+                    labelFilter.style.marginRight = '130px';
+                };
+            };
+
+            divForMiniContactForm.addEventListener('mouseenter', forHoverEnter);
+            divForMiniContactForm.addEventListener('mouseleave', forHoverLeave);
+        });
+
     return (
         <div className={[css.modalDivContactForm, 'modalDivContactForm'].join(' ')}>
             <div className={[css.firstDivContactForm, 'firstDivContactForm'].join(' ')}>
-                <div className={css.divForMiniContactForm}>
+                <div className={[css.divForMiniContactForm, 'divForMiniContactForm'].join(' ')}>
                     <button className={css.buttonAddMiniContactForm} type='button' onClick={forAddButton}>
                         Add
                     </button>

@@ -14,10 +14,16 @@
     color: transparent;
     margin: 0;
     background-image: url('./home-4-svgrepo-com.svg#home');
-    /* background-image: url('../contacts-svgrepo-com.svg#ContactsBook'); */
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
+    margin-left: -15px;
+    transition: background-image 250ms cubic-bezier(0.25, 0.1, 0.25, 1), font-size 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.pNavigation:hover{
+    font-size: 28.8px;
+    background-image: url('./home-4-hover-svgrepo-com\ копія.svg');
 }
 
 
@@ -25,5 +31,6 @@
 @media (max-width: 400px){
     .pNavigation{
         font-size: 16px;
+        margin-left: -10px;
     }
 }

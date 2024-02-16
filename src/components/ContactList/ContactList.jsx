@@ -59,7 +59,7 @@ export const ContactList = () => {
     }
 
     return(
-        <div className={css.allDivContactList}>
+        <div className={[css.allDivContactList, 'allDivContactList'].join(' ')}>
         {error ? (
         <h2>Oopsss...Something went wrong...</h2>
         ) : (

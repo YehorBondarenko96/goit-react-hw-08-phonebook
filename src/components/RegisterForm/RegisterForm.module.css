@@ -89,6 +89,10 @@
 
 @media (max-height: 520px){
     .titleRegisterForm{
-        margin: 0;
+        margin: 10px;
+    }
+
+    .registerForm{
+        gap: 30px;
     }
 }

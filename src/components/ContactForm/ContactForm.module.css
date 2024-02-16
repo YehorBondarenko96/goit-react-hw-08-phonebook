@@ -38,51 +38,45 @@
     width: 100%;
 	height: 100%;
 	cursor: pointer;
-    transition: width 250ms cubic-bezier(0.25, 0.1, 0.25, 1), height 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition: width 250ms cubic-bezier(0.25, 0.1, 0.25, 1), height 250ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                font-size 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* .buttonAddMiniContactForm::before,
-.buttonAddMiniContactForm::after {
-	content: '';
-	position: absolute;
-	display: block;
-	width: 30px;
-	height: 4px;
-	background: #009200;
-    transition: width 250ms cubic-bezier(0.25, 0.1, 0.25, 1), height 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
+.divForMiniContactFormHover .buttonAddMiniContactForm{
+    font-size: 28.8px;
 }
-
-.buttonAddMiniContactForm::before {
-	transform: rotate(0deg);
-}
-
-.buttonAddMiniContactForm::after {
-	transform: rotate(90deg);
-} */
 
 .firstDivContactForm{
-    position: relative;
+    position: absolute;
     padding: 0;
     width: 100px;
     height: 60px;
     background-color: #949494;
     border-radius: 4px;
-    top: 0;
-    left: 100%;
-    transform: translate(-100%, 0);
+    top: 70px;
+    right: 20px;
+    transform: translate(0, 0);
     transition: width 250ms cubic-bezier(0.25, 0.1, 0.25, 1), height 250ms cubic-bezier(0.25, 0.1, 0.25, 1),
                 border-radius 250ms cubic-bezier(0.25, 0.1, 0.25, 1), position 250ms cubic-bezier(0.25, 0.1, 0.25, 1), 
-                top 250ms cubic-bezier(0.25, 0.1, 0.25, 1), left 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                top 250ms cubic-bezier(0.25, 0.1, 0.25, 1), right 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.divForMiniContactFormHover{
+    top: 65px;
+    right: 25px;
+    transform: translate(0, 0);
+    z-index: 9999;
+    width: 120px;
+    height: 72px;
 }
 
 .firstDivContactFormActive{
     width: 500px;
     height: 300px;
     border-radius: 20px;
-    position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    right: 50%;
+    transform: translate(50%, -50%);
 }
 
 .divContactForm{
@@ -124,6 +118,10 @@
     gap: 2px;
 }
 
+.divForMiniContactFormHover .labelContactForm{
+    gap: 2.4px;
+}
+
 .firstDivContactFormActive .labelContactForm{
     gap: 10px;
 }
@@ -135,6 +133,14 @@
     border: none;
     border-radius: 2px;
     padding: 0 10px;
+    transition: width 250ms cubic-bezier(0.25, 0.1, 0.25, 1), height 250ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                font-size 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.divForMiniContactFormHover .inputContactForm{
+    width: 72px;
+    height: 9.6px;
+    font-size: 6px;
 }
 
 .firstDivContactFormActive .inputContactForm{
@@ -151,6 +157,14 @@
     font-size: 3px;
     border: none;
     border-radius: 2px;
+    transition: width 250ms cubic-bezier(0.25, 0.1, 0.25, 1), height 250ms cubic-bezier(0.25, 0.1, 0.25, 1),
+                font-size 250ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.divForMiniContactFormHover .buttonContactForm{
+    width: 33.6px;
+    height: 8.4px;
+    font-size: 3.6px;
 }
 
 .firstDivContactFormActive .buttonContactForm{
@@ -163,6 +177,69 @@
     font-size: 3px;
 }
 
+.divForMiniContactFormHover .nameInputContactForm{
+    font-size: 3.6px;
+}
+
 .firstDivContactFormActive .nameInputContactForm{
     font-size: 20px;
+}
+
+
+@media (max-width: 600px){
+    .firstDivContactFormActive{
+        width: 400px;
+        height: 240px;
+    }
+
+    .firstDivContactFormActive .labelContactForm{
+        gap: 8px;
+    }
+
+    .firstDivContactFormActive .inputContactForm{
+        width: 240px;
+        height: 32px;
+        border-radius: 8px;
+        font-size: 15px;
+    }
+
+    .firstDivContactFormActive .buttonContactForm{
+        width: 72px;
+        height: 17px;
+        font-size: 11px;
+    }
+
+    .firstDivContactFormActive .nameInputContactForm{
+        font-size: 16px;
+    }
+}
+
+
+
+@media (max-width: 450px){
+    .firstDivContactFormActive{
+        width: 300px;
+        height: 180px;
+    }
+
+    .firstDivContactFormActive .labelContactForm{
+        gap: 6px;
+    }
+
+    .firstDivContactFormActive .inputContactForm{
+        width: 180px;
+        height: 24px;
+        border-radius: 6px;
+        font-size: 12px;
+    }
+
+    .firstDivContactFormActive .buttonContactForm{
+        width: 54px;
+        height: 13px;
+        font-size: 7px;
+    }
+
+    .firstDivContactFormActive .nameInputContactForm{
+        font-size: 12px;
+    }
 }

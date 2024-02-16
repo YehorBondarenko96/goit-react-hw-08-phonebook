@@ -28,7 +28,7 @@ export const Filter = () => {
     }, []);
 
         return(
-            <label className={css.labelFilter}>
+            <label className={[css.labelFilter, 'labelFilter'].join(' ')}>
                 <input 
                 value={filterWithState}
                 className={css.inputFilter} 
