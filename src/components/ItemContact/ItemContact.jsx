@@ -6,6 +6,8 @@ import { deleteNumb } from '../../redux/backgroundImgSlice';
 import { useEffect, useState, useRef } from 'react';
 import { ChangingCWindow } from '../ChangingCWindow/ChangingCWindow';
 import { setScrollLeftLists } from '../../redux/contactsSlice';
+import { selectScreenOrient } from "../../redux/selectors";
+
 
 export const ItemContact = ({contact, index, id, activeId}) => {
     const extraReservedImg = 'https://lh3.googleusercontent.com/pw/ABLVV857Vcs93eVOrm0Pm8WnNvcJSKLX3arSslyCmWpj-7cuG6ywCsjBpMiPRikFXgiC2xK8v2En5xPEynswskO4l7gjBpdWNWzhFRyOj8BJ3orxfjDDlbSF1EOr7mROLVTTOvdNiJhvM432128-GmRqOrEKcQ=w1500-h1000-s-no-gm?authuser=0';
@@ -13,6 +15,8 @@ export const ItemContact = ({contact, index, id, activeId}) => {
     const dispatch = useDispatch();
     const numbsForImg = useSelector(selectNumbsForImg);
     const backgrounds = useSelector(selectBackgrounds);
+    const screenOrient = useSelector(selectScreenOrient);
+
 
     const lengthBgImages = useSelector(selectBackgroundImages).length;
     const objBgGeneral = useSelector(selectBgGeneral);
@@ -67,8 +71,7 @@ export const ItemContact = ({contact, index, id, activeId}) => {
 
     useEffect(() => {
         const coef = 2;
-        const realScreenWidth = window.innerWidth;
-        const screenWidth = realScreenWidth <= 1000 ? realScreenWidth : 1000;
+        const screenWidth = screenOrient <= 1000 ? screenOrient : 1000;
         if(id !== activeId && firstDivItemContact && divItemContact && buttonCh && buttonDel){
             setActiveChenging(false);
             firstDivItemContact.style.borderRadius = screenWidth/(coef * 22) + 'px';
@@ -95,7 +98,7 @@ export const ItemContact = ({contact, index, id, activeId}) => {
             buttonCh.style.width = screenWidth/(coef * 13) * 1.4 + 'px';
             buttonCh.style.height = screenWidth/(coef * 13) * 1.4 + 'px';
         }
-    }, [activeId, id, divItemContact, firstDivItemContact, buttonCh, buttonDel]);
+    }, [activeId, id, divItemContact, firstDivItemContact, buttonCh, buttonDel, screenOrient]);
 
     const forClickUpdBut = () => {
         setTimeout(() => {

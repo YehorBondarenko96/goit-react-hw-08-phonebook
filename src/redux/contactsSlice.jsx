@@ -4,6 +4,7 @@ import { fetchContacts, addContact, deleteContact, patchContact } from "./operti
 const contactsInitialState = {
     items: [],
     scrollLeftLists: 0,
+    screenOrientation: 1,
     isLoading: false,
     error: null
     };
@@ -18,7 +19,8 @@ const contactsSlice = createSlice({
     name: 'contacts',
     initialState: contactsInitialState,
     reducers:{
-        setScrollLeftLists(state, action){state.scrollLeftLists = action.payload}
+        setScrollLeftLists: (state, action) => {state.scrollLeftLists = action.payload},
+        setScreenOrientation: (state, action) => {state.screenOrientation = action.payload}
     },
     extraReducers: builder => {
         builder
@@ -56,4 +58,4 @@ const contactsSlice = createSlice({
 });
 
 export const contactsReducer = contactsSlice.reducer;
-export const {setScrollLeftLists} = contactsSlice.actions;
+export const {setScrollLeftLists, setScreenOrientation} = contactsSlice.actions;
