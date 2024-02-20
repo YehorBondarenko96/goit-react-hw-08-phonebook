@@ -49,7 +49,7 @@ export const UlForCL = () => {
         // console.log(3);
         // const indHasClickEL = [];
 
-        let listContHasELAfAct = false;
+        // let listContHasELAfAct = false;
         let itemsContact = document.querySelectorAll('.itemContact');
         const listContactsForGap = document.querySelector('.listContactsForGap');
         const coef = 2;
@@ -142,7 +142,7 @@ export const UlForCL = () => {
                             setTimeout(() => {
                                 if(!listContHasEL && listContactsRef){
                                     listContHasELRef.current = true;
-                                    listContHasELAfAct = true;
+                                    // listContHasELAfAct = true;
                                     // setListContHasEL(true);
                                     console.log(1);
                                     listContactsRef.removeEventListener('scroll', forScroll);
