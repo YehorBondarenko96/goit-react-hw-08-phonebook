@@ -66,10 +66,13 @@ export const UlForCL = () => {
         listContactsForGap.style.gap = screenWidth/(coef * 10) + 'px';
 
         const forScroll = () => {
-            itemsContact = document.querySelectorAll('.itemContact');
-            if(itemsContact){
-                itemsContact.forEach(item => readRectItem(item, realScreenWidth));
-            };
+            setTimeout(() => {
+                console.log(4);
+                itemsContact = document.querySelectorAll('.itemContact');
+                if(itemsContact){
+                    itemsContact.forEach(item => readRectItem(item, realScreenWidth));
+                };
+            }, 500);
         };
 
         // if(listContactsRef){
@@ -96,6 +99,11 @@ export const UlForCL = () => {
         }, 0);
 
         const autoScroll = (item, conditionForAutoSc = 0) => {
+            if(listContactsRef){
+                console.log(2);
+                listContactsRef.removeEventListener('scroll', forScroll);
+                // listContHasELRef.current = false;
+            };
             itemsContact = document.querySelectorAll('.itemContact');
             realScreenWidth = window.innerWidth;
             screenWidth = realScreenWidth <= 1000 ? realScreenWidth : 1000;
@@ -121,9 +129,9 @@ export const UlForCL = () => {
                         };
     
                         if(listContactsRef){
-                            listContactsRef.removeEventListener('scroll', forScroll);
                             // listContactsRef.removeEventListener('scroll', forScroll);
-                            listContHasELRef.current = false;
+                            // listContactsRef.removeEventListener('scroll', forScroll);
+                            // listContHasELRef.current = false;
                             // listContactsRef.removeEventListener('scroll', forScroll);
 
                             // listContHasELAfAct = false;
@@ -138,14 +146,13 @@ export const UlForCL = () => {
                             //     listContactsRef.removeEventListener('scroll', forScroll);
                             //     listContactsRef.removeEventListener('scroll', forScroll);
                             // }, 100);
-
                             setTimeout(() => {
                                 if(!listContHasEL && listContactsRef){
                                     listContHasELRef.current = true;
                                     // listContHasELAfAct = true;
                                     // setListContHasEL(true);
                                     console.log(1);
-                                    listContactsRef.removeEventListener('scroll', forScroll);
+                                    // listContactsRef.removeEventListener('scroll', forScroll);
                                     listContactsRef.addEventListener('scroll', forScroll);
 
                                     // listContactsRef.removeEventListener('scroll', forScroll);
@@ -157,6 +164,13 @@ export const UlForCL = () => {
         };
 
         const forClickItem = (item, realScreenWidth) => {
+            console.log(3);
+            // const listContactsbyQS = document.querySelector('.listContactsForGap');
+            // console.log('listContactsbyQS: ', listContactsbyQS);
+            // if(listContactsbyQS){
+            //     console.log(2);
+            //     listContactsbyQS.removeEventListener('scroll', forScroll);
+            // };
             const rectItem = item.getBoundingClientRect();
             const rectListContacts = listContacts.current.getBoundingClientRect();
             let firShiftVar = 260;
@@ -214,7 +228,7 @@ export const UlForCL = () => {
         itemsContact.forEach(item => {
             const itemId = item.getAttribute('id');
             if(!indHasClickEL.includes(itemId)){
-                item.removeEventListener('click', () => forClickItem(item, realScreenWidth));
+                // item.removeEventListener('click', () => forClickItem(item, realScreenWidth));
                 item.addEventListener('click', () => forClickItem(item, realScreenWidth));
                 indHasClickEL.push(itemId);
             }
