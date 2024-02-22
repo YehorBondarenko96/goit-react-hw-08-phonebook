@@ -16,14 +16,14 @@ export const UlForCL = () => {
     const screenOrient = useSelector(selectScreenOrient);
 
     const [activeId, setActiveId] = useState(null);
-    const [listContHasELState, setListContHasELState] = useState(false);
+
+    const listContHasELRef = useRef(false);
+    const itemContactRef = useRef([]);
     
 
     const indHasClickELRef = useRef([]);
-    const indHasClickEL = indHasClickELRef.current;
 
     const listContacts = useRef(null);
-    const listContactsRef = listContacts.current;
 
     useEffect(() => {
         if(scrollLeftLists > 0){
@@ -45,12 +45,14 @@ export const UlForCL = () => {
     }, [filter, allContacts]);
 
     useEffect(() => {
-        let itemsContact = document.querySelectorAll('.itemContact');
+        const listContactsRef = listContacts.current;
+        const indHasClickEL = indHasClickELRef.current;
+        const itemsContact = itemContactRef.current.filter(li => li !== null);
         const listContactsForGap = document.querySelector('.listContactsForGap');
         const coef = 2;
         let realScreenWidth = window.innerWidth;
         let screenWidth = realScreenWidth <= 1000 ? realScreenWidth : 1000;
-        if(screenWidth && itemsContact){
+        if(screenWidth && itemsContact.length > 0){
         itemsContact.forEach(i => {
             i.style.minWidth = screenWidth/coef + 'px';
             i.style.height = screenWidth/(coef * 1.667) + 'px';
@@ -61,25 +63,21 @@ export const UlForCL = () => {
         listContactsForGap.style.gap = screenWidth/(coef * 10) + 'px';
 
         const forScroll = () => {
-                itemsContact = document.querySelectorAll('.itemContact');
-                if(itemsContact){
+                if(itemsContact.length > 0){
                     itemsContact.forEach(item => readRectItem(item, realScreenWidth));
                 };
         };
 
-            itemsContact = document.querySelectorAll('.itemContact');
-            if(!listContHasELState && listContactsRef && itemsContact){
-                setListContHasELState(true);
-                
+            if(!listContHasELRef.current && listContactsRef && itemsContact){
+                listContHasELRef.current = true;
                 listContactsRef.addEventListener('scroll', forScroll);
             };
 
         const autoScroll = (item, conditionForAutoSc = 0) => {
-            itemsContact = document.querySelectorAll('.itemContact');
             realScreenWidth = window.innerWidth;
             screenWidth = realScreenWidth <= 1000 ? realScreenWidth : 1000;
-            if(screenWidth && itemsContact){
-                const notActiveItems = [...itemsContact].filter(i => i.getAttribute('id') !== item.getAttribute('id'));
+            if(screenWidth && itemsContact.length > 0){
+                const notActiveItems = itemsContact.filter(i => i.getAttribute('id') !== item.getAttribute('id'));
                 notActiveItems.forEach(i => {
                     i.style.minWidth = screenWidth/coef + 'px';
                     i.style.height = screenWidth/(coef * 1.667) + 'px';
@@ -109,7 +107,7 @@ export const UlForCL = () => {
         
         const forClickItem = (item, realScreenWidth) => {
             if(listContactsRef){
-                listContactsRef.removeEventListener('scroll', forScroll)
+                listContactsRef.removeEventListener('scroll', forScroll);
             };
             const rectItem = item.getBoundingClientRect();
             const rectListContacts = listContacts.current.getBoundingClientRect();
@@ -211,11 +209,22 @@ export const UlForCL = () => {
         };
 
         return () => {
-            itemsContact = null;
             screenWidth = null;
+            if(listContactsRef){
+                listContHasELRef.current = false;
+                listContactsRef.removeEventListener('scroll', forScroll);
+            };
+
+            if(itemsContact.length > 0){
+                itemsContact.forEach(item => {
+                    item.removeEventListener('click', () => forClickItem(item, realScreenWidth));
+            });
+            indHasClickELRef.current = [];
+            };
+            itemContactRef.current = [];
         }
     }
-    }, [contacts, indHasClickEL, listContHasELState, listContactsRef, screenOrient]);
+    }, [contacts, screenOrient]);
 
     useEffect(() => {
             const realScreenHeight = window.innerHeight;
@@ -246,7 +255,7 @@ export const UlForCL = () => {
             {contacts.length !== 0 &&
                 contacts.map((contact) => { 
                     return(
-                    <li key={contact.id} id={contact.id} className={[css.itemContact, 'itemContact'].join(' ')}>
+                    <li ref={e => itemContactRef.current.push(e)} key={contact.id} id={contact.id} className={[css.itemContact, 'itemContact'].join(' ')}>
                     <ItemContact 
                         contact={contact}
                         index={contacts.indexOf(contact)}
