@@ -19,20 +19,6 @@ export const UlForCL = () => {
 
     const listContHasELRef = useRef(false);
     const itemContactRef = useRef([]);
-    // console.log(1);
-    // let itemContactRefCur = itemContactRef.current.length;
-    // let itemContactRefCur = 0;
-
-    // setTimeout(() => {
-    // console.log(1);
-    // itemContactRefCur = itemContactRef.current.length;
-    // console.log('itemContactRefCur: ', itemContactRefCur);
-    // }, 0);
-
-    useEffect(() => {
-    let itemContactRefCur = itemContactRef.current.length;
-    console.log('itemContactRefCur: ', itemContactRefCur);
-    });
     
 
     const indHasClickELRef = useRef([]);
@@ -51,15 +37,6 @@ export const UlForCL = () => {
     }, [scrollLeftLists, dispatch]);
 
     useEffect(() => {
-        // itemContactRef.current = [];
-        if(filter.length > 0) {
-            setContacts(allContacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase())));
-        } else{
-            setContacts(allContacts);
-        };
-    }, [filter, allContacts]);
-
-    useEffect(() => {
         const listContactsRef = listContacts.current;
         const indHasClickEL = indHasClickELRef.current;
         const itemsContact = itemContactRef.current;
@@ -67,14 +44,7 @@ export const UlForCL = () => {
         const coef = 2;
         let realScreenWidth = window.innerWidth;
         let screenWidth = realScreenWidth <= 1000 ? realScreenWidth : 1000;
-        let itemContactRefCur = itemContactRef.current.length;
-    console.log('itemContactRefCur: ', itemContactRefCur);
-        console.log(3);
-        console.log(itemContactRef.current);
-        console.log(itemContactRefCur);
-        console.log(itemsContact);
         if (screenWidth && itemsContact.length > 0) {
-            console.log(1);
             itemsContact.forEach(i => {
             i.style.minWidth = screenWidth/coef + 'px';
             i.style.height = screenWidth/(coef * 1.667) + 'px';
@@ -248,6 +218,15 @@ export const UlForCL = () => {
     }, [contacts, screenOrient]);
 
     useEffect(() => {
+        itemContactRef.current = [];
+        if(filter.length > 0) {
+            setContacts(allContacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase())));
+        } else{
+            setContacts(allContacts);
+        };
+    }, [filter, allContacts]);
+
+    useEffect(() => {
             const realScreenHeight = window.innerHeight;
             const header = document.querySelector('header');
                 const main = document.querySelector('.divForAllMain');
@@ -277,9 +256,7 @@ export const UlForCL = () => {
                 contacts.map((contact) => { 
                     return(
                         <li ref={e => { 
-                            console.log(2);
                             if (e !== null && !itemContactRef.current.some(i => i.getAttribute('id') === e.getAttribute('id'))) {
-                                console.log(2.1);
                                         itemContactRef.current.push(e); 
                                     }
                             }}
