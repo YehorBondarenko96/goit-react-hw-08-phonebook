@@ -21,6 +21,11 @@ export const UlForCL = () => {
     const itemContactRef = useRef([]);
     console.log(1);
     let itemContactRefCur = itemContactRef.current.length;
+    useEffect(() => {
+    console.log(1);
+    let itemContactRefCur = itemContactRef.current.length;
+    console.log('itemContactRefCur: ', itemContactRefCur);
+    });
     
 
     const indHasClickELRef = useRef([]);
