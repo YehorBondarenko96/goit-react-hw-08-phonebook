@@ -227,7 +227,7 @@ export const UlForCL = () => {
             };
         }
     }
-    }, [contacts, screenOrient]);
+    }, [contacts, screenOrient, itemContactRef]);
 
     useEffect(() => {
             const realScreenHeight = window.innerHeight;
