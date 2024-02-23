@@ -48,12 +48,15 @@ export const UlForCL = () => {
     useEffect(() => {
         const listContactsRef = listContacts.current;
         const indHasClickEL = indHasClickELRef.current;
-        const itemsContact = itemContactRef.current.filter(li => li !== null);
+        const itemsContact = itemContactRef.current;
         const listContactsForGap = document.querySelector('.listContactsForGap');
         const coef = 2;
         let realScreenWidth = window.innerWidth;
         let screenWidth = realScreenWidth <= 1000 ? realScreenWidth : 1000;
+        console.log(itemsContact);
+        console.log(screenWidth);
         if (screenWidth && itemsContact.length > 0) {
+            console.log(1);
             itemsContact.forEach(i => {
             i.style.minWidth = screenWidth/coef + 'px';
             i.style.height = screenWidth/(coef * 1.667) + 'px';
