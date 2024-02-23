@@ -19,7 +19,8 @@ export const UlForCL = () => {
 
     const listContHasELRef = useRef(false);
     const itemContactRef = useRef([]);
-    const itemContactRefCur = itemContactRef.current.length;
+    console.log(1);
+    let itemContactRefCur = itemContactRef.current.length;
     
 
     const indHasClickELRef = useRef([]);
@@ -54,6 +55,8 @@ export const UlForCL = () => {
         const coef = 2;
         let realScreenWidth = window.innerWidth;
         let screenWidth = realScreenWidth <= 1000 ? realScreenWidth : 1000;
+        console.log(3);
+        console.log(itemContactRef.current);
         console.log(itemsContact);
         console.log(screenWidth);
         if (screenWidth && itemsContact.length > 0) {
@@ -260,6 +263,7 @@ export const UlForCL = () => {
                 contacts.map((contact) => { 
                     return(
                         <li ref={e => { 
+                            console.log(2);
                             if (e !== null && !itemContactRef.current.some(i => i.getAttribute('id') === e.getAttribute('id'))) {
                                         itemContactRef.current.push(e); 
                                     }
