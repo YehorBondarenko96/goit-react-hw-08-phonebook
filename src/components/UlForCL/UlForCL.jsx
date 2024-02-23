@@ -37,6 +37,7 @@ export const UlForCL = () => {
     }, [scrollLeftLists, dispatch]);
 
     useEffect(() => {
+        itemContactRef.current = [];
         if(filter.length > 0) {
             setContacts(allContacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase())));
         } else{
@@ -52,8 +53,8 @@ export const UlForCL = () => {
         const coef = 2;
         let realScreenWidth = window.innerWidth;
         let screenWidth = realScreenWidth <= 1000 ? realScreenWidth : 1000;
-        if(screenWidth && itemsContact.length > 0){
-        itemsContact.forEach(i => {
+        if (screenWidth && itemsContact.length > 0) {
+            itemsContact.forEach(i => {
             i.style.minWidth = screenWidth/coef + 'px';
             i.style.height = screenWidth/(coef * 1.667) + 'px';
             i.style.fontSize = screenWidth/(coef * 19) + 'px'; 
@@ -165,7 +166,7 @@ export const UlForCL = () => {
 
         itemsContact.forEach(item => {
             const itemId = item.getAttribute('id');
-            if(!indHasClickEL.includes(itemId) && listContactsRef){
+            if (!indHasClickEL.includes(itemId) && listContactsRef) {
                 item.addEventListener('click', () => forClickItem(item, realScreenWidth));
                 indHasClickEL.push(itemId);
             }
@@ -218,10 +219,9 @@ export const UlForCL = () => {
             if(itemsContact.length > 0){
                 itemsContact.forEach(item => {
                     item.removeEventListener('click', () => forClickItem(item, realScreenWidth));
-            });
+                });
             indHasClickELRef.current = [];
             };
-            itemContactRef.current = [];
         }
     }
     }, [contacts, screenOrient]);
@@ -255,7 +255,14 @@ export const UlForCL = () => {
             {contacts.length !== 0 &&
                 contacts.map((contact) => { 
                     return(
-                    <li ref={e => itemContactRef.current.push(e)} key={contact.id} id={contact.id} className={[css.itemContact, 'itemContact'].join(' ')}>
+                        <li ref={e => { 
+                            if (e !== null && !itemContactRef.current.some(i => i.getAttribute('id') === e.getAttribute('id'))) {
+                                        itemContactRef.current.push(e); 
+                                    }
+                            }}
+                            key={contact.id}
+                            id={contact.id}
+                            className={[css.itemContact, 'itemContact'].join(' ')}>
                     <ItemContact 
                         contact={contact}
                         index={contacts.indexOf(contact)}
