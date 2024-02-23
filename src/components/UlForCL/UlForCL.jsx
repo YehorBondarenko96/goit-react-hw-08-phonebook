@@ -19,6 +19,7 @@ export const UlForCL = () => {
 
     const listContHasELRef = useRef(false);
     const itemContactRef = useRef([]);
+    const itemContactRefCur = itemContactRef.current;
     
 
     const indHasClickELRef = useRef([]);
@@ -227,7 +228,7 @@ export const UlForCL = () => {
             };
         }
     }
-    }, [contacts, screenOrient, itemContactRef]);
+    }, [contacts, screenOrient, itemContactRefCur]);
 
     useEffect(() => {
             const realScreenHeight = window.innerHeight;
