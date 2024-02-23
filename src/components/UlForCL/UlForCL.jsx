@@ -19,13 +19,22 @@ export const UlForCL = () => {
 
     const listContHasELRef = useRef(false);
     const itemContactRef = useRef([]);
+    // console.log(1);
+    // let itemContactRefCur = itemContactRef.current.length;
+    let itemContactRefCur = 0;
+
+    setTimeout(() => {
+        // const itemContactRef = useRef([]);
     console.log(1);
-    let itemContactRefCur = itemContactRef.current.length;
-    useEffect(() => {
-    console.log(1);
-    let itemContactRefCur = itemContactRef.current.length;
+    itemContactRefCur = itemContactRef.current.length;
     console.log('itemContactRefCur: ', itemContactRefCur);
-    });
+    }, 0);
+
+    // useEffect(() => {
+    // console.log(1);
+    // let itemContactRefCur = itemContactRef.current.length;
+    // console.log('itemContactRefCur: ', itemContactRefCur);
+    // });
     
 
     const indHasClickELRef = useRef([]);
@@ -62,6 +71,7 @@ export const UlForCL = () => {
         let screenWidth = realScreenWidth <= 1000 ? realScreenWidth : 1000;
         console.log(3);
         console.log(itemContactRef.current);
+        console.log(itemContactRefCur);
         console.log(itemsContact);
         if (screenWidth && itemsContact.length > 0) {
             console.log(1);
