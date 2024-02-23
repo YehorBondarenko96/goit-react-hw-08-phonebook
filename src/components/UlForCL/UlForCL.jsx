@@ -58,7 +58,6 @@ export const UlForCL = () => {
         console.log(3);
         console.log(itemContactRef.current);
         console.log(itemsContact);
-        console.log(screenWidth);
         if (screenWidth && itemsContact.length > 0) {
             console.log(1);
             itemsContact.forEach(i => {
@@ -265,6 +264,7 @@ export const UlForCL = () => {
                         <li ref={e => { 
                             console.log(2);
                             if (e !== null && !itemContactRef.current.some(i => i.getAttribute('id') === e.getAttribute('id'))) {
+                                console.log(2.1);
                                         itemContactRef.current.push(e); 
                                     }
                             }}
