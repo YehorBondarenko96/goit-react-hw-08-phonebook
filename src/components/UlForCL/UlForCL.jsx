@@ -19,7 +19,7 @@ export const UlForCL = () => {
 
     const listContHasELRef = useRef(false);
     const itemContactRef = useRef([]);
-    const itemContactRefCur = itemContactRef.current;
+    const itemContactRefCur = itemContactRef.current.length;
     
 
     const indHasClickELRef = useRef([]);
