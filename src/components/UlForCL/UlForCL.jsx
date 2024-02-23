@@ -21,20 +21,18 @@ export const UlForCL = () => {
     const itemContactRef = useRef([]);
     // console.log(1);
     // let itemContactRefCur = itemContactRef.current.length;
-    let itemContactRefCur = 0;
+    // let itemContactRefCur = 0;
 
-    setTimeout(() => {
-        // const itemContactRef = useRef([]);
-    console.log(1);
-    itemContactRefCur = itemContactRef.current.length;
-    console.log('itemContactRefCur: ', itemContactRefCur);
-    }, 0);
-
-    // useEffect(() => {
+    // setTimeout(() => {
     // console.log(1);
-    // let itemContactRefCur = itemContactRef.current.length;
+    // itemContactRefCur = itemContactRef.current.length;
     // console.log('itemContactRefCur: ', itemContactRefCur);
-    // });
+    // }, 0);
+
+    useEffect(() => {
+    let itemContactRefCur = itemContactRef.current.length;
+    console.log('itemContactRefCur: ', itemContactRefCur);
+    });
     
 
     const indHasClickELRef = useRef([]);
@@ -69,6 +67,8 @@ export const UlForCL = () => {
         const coef = 2;
         let realScreenWidth = window.innerWidth;
         let screenWidth = realScreenWidth <= 1000 ? realScreenWidth : 1000;
+        let itemContactRefCur = itemContactRef.current.length;
+    console.log('itemContactRefCur: ', itemContactRefCur);
         console.log(3);
         console.log(itemContactRef.current);
         console.log(itemContactRefCur);
@@ -245,7 +245,7 @@ export const UlForCL = () => {
             };
         }
     }
-    }, [contacts, screenOrient, itemContactRefCur]);
+    }, [contacts, screenOrient]);
 
     useEffect(() => {
             const realScreenHeight = window.innerHeight;
